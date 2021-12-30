@@ -25,27 +25,6 @@
                                       materialDesign:ShadowAssist.ShadowDepth="Depth3">
 
                 <Grid>
-                    <!--第三个多边形-->
-                    <Polygon Points="780,0 1100,0 1100,65 723,65 "
-                             StrokeThickness="1">
-                        <Polygon.Fill>
-                            <SolidColorBrush Color="#3448A1" />
-                        </Polygon.Fill>
-                    </Polygon>
-                    <!--第二个多边形-->
-                    <Polygon Points="700,0 780,0 740,50 "
-                             StrokeThickness="1">
-                        <Polygon.Fill>
-                            <SolidColorBrush Color="#3E58C9" />
-                        </Polygon.Fill>
-                    </Polygon>
-                    <!--第一个多边形-->
-                    <Polygon Points="0,0 700,0 756,65 0,65"
-                             StrokeThickness="1">
-                        <Polygon.Fill>
-                            <SolidColorBrush Color="#1C93EC" />
-                        </Polygon.Fill>
-                    </Polygon>
                     <Ellipse Cursor="Hand"
                              HorizontalAlignment="Left"
                              Margin="10 5"
