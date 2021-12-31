@@ -1,0 +1,297 @@
+﻿<UserControl x:Class="SmartToolsDotNet.Views.CodeLessControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SmartToolsDotNet.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:Metro="clr-namespace:AduSkin.Controls.Metro;assembly=AduSkin" xmlns:viewmodel="clr-namespace:SmartToolsDotNet.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CodeLessVM}"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Grid>
+
+        <!--布局定义-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--第一行-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Metro:AduFormLable Title="{DynamicResource connectString}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <Metro:MetroTextBox
+                Margin="110,10,10,0"
+                InputHint="{DynamicResource connectStrHint}"
+                PopupHint="{DynamicResource connectStrHint}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Name="connectString"
+                Height="36"
+                VerticalContentAlignment="Center"
+                Text="{Binding ConnectionString}"
+                Grid.Row="0"
+            />
+
+            <Button
+                Name="testConnect"
+                Margin="0,10,10,0"
+                Content="{DynamicResource connectDb}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource ButtonPrimary}"
+                Grid.Column="1"
+                Click="connect_Click"
+                Width="100"
+                hc:BorderElement.CornerRadius="15"
+                />
+
+        </Grid>
+
+        <!--第二行-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Metro:AduFormLable Title="{DynamicResource database}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <Metro:AduComboBox Name="databases" SelectedValue="{Binding Database}" HorizontalAlignment="Stretch"
+                                Margin="110,10,10,0"
+                                VerticalAlignment="Center" SelectionChanged="databases_Selected" />
+
+            <Metro:AduFormLable Title="{DynamicResource dbtable}" Margin="40,10,10,0" HorizontalAlignment="Left" Grid.Column="1"/>
+
+            <Metro:AduComboBox Name="dbtables" SelectedValue="{Binding DbTable}" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                               Margin="110,10,10,0" Grid.Column="1" SelectionChanged="dbtables_SelectionChanged"/>
+        </Grid>
+
+        <!--第三行-->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Metro:AduFormLable Title="{DynamicResource primarykey}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <Metro:AduComboBox Name="primarykey" SelectedValue="{Binding Primarykey}" HorizontalAlignment="Stretch" ItemsSource="{Binding DbTableInfos}"
+                                   SelectedValuePath="columnName" DisplayMemberPath="displayName" Margin="110,10,10,0"
+                                   VerticalAlignment="Center"/>
+
+            <Metro:AduFormLable Title="{DynamicResource searchParam}" Margin="40,10,10,0" HorizontalAlignment="Left" Grid.Column="1"/>
+
+            <hc:CheckComboBox ItemsSource="{Binding DbTableInfos}" HorizontalAlignment="Stretch" hc:InfoElement.TitleWidth="140" Height="35"
+                              Grid.Column="1" SelectedValuePath="columnName" DisplayMemberPath="displayName" MaxHeight="35"
+                              VerticalAlignment="Top" VerticalContentAlignment="Top" Name="searchparam"
+                              Style="{StaticResource CheckComboBoxBaseStyle}" Margin="110,10,10,0" SelectionChanged="CheckComboBox_SelectionChanged"/>
+        </Grid>
+
+        <!--第四行-->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition ></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Metro:AduFormLable Title="{DynamicResource slnfile}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <Metro:MetroTextBox
+                Margin="110,10,10,0"
+                InputHint="{DynamicResource slnfileHint}"
+                PopupHint="{DynamicResource slnfileHint}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Name="slnfileaddr"
+                Height="36"
+                VerticalContentAlignment="Center"
+                Text="{Binding Slnfileaddr}"
+                Grid.Row="0"
+                IsEnabled="False"
+
+            />
+
+            <Button
+                Name="selectfile"
+                Margin="0,10,10,0"
+                Content="{DynamicResource selectfile}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Style="{StaticResource ButtonPrimary}"
+                Grid.Column="1"
+                Click="selectfile_Click"
+                Width="100"
+                hc:BorderElement.CornerRadius="15"
+                />
+
+        </Grid>
+
+        <!--第五行-->
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Metro:AduFormLable Title="{DynamicResource project}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <Metro:AduComboBox Name="project" SelectedValue="{Binding Project}" HorizontalAlignment="Stretch" ItemsSource="{Binding Projectlist}"
+                                   SelectedValuePath="projName" DisplayMemberPath="projName" Margin="110,10,10,0" SelectedIndex="0"
+                                   VerticalAlignment="Center" SelectionChanged="project_SelectionChanged"/>
+
+            <Metro:AduFormLable Title="{DynamicResource projectarea}" Margin="40,10,10,0" HorizontalAlignment="Left" Grid.Column="1"/>
+
+            <Metro:AduComboBox Name="projectArea" SelectedValue="{Binding ProjectArea}" VerticalAlignment="Center"
+                                   Margin="110,10,10,0" Grid.Column="1" SelectedIndex="0"
+                                   HorizontalAlignment="Stretch" ItemsSource="{Binding Arealist}" SelectionChanged="projectArea_SelectionChanged"/>
+        </Grid>
+
+        <!--第六行-->
+        <Grid Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--命名空间文本-->
+            <Metro:AduFormLable Title="{DynamicResource rootnamespace}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <!--命名空间输入框-->
+            <Metro:MetroTextBox
+                Height="36"
+                Margin="110,10,10,0"
+                InputHint="{DynamicResource rootnamespace}"
+                PopupHint="{DynamicResource rootnamespace}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Name="rootnamespace"
+                Text="{Binding Rootnamespace}"
+                Grid.Row="0"
+            />
+        </Grid>
+
+        <!--第七行-->
+        <Grid Grid.Row="6">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--基类类型文本-->
+            <Metro:AduFormLable Title="{DynamicResource basetype}" Margin="40,10,10,0" HorizontalAlignment="Left"/>
+
+            <!--基类类型下拉框-->
+            <Metro:AduComboBox Name="basetype" SelectedValue="{Binding Basetype}" HorizontalAlignment="Stretch"
+                                ItemsSource="{Binding Basetypelist}" SelectedIndex="1"
+                                Margin="110,10,10,0" VerticalAlignment="Center" />
+
+            <!--视图标题-->
+            <Metro:AduFormLable Title="{DynamicResource viewtitle}" Margin="40,10,10,0" HorizontalAlignment="Left" Grid.Column="1"/>
+
+            <!--视图标题输入框-->
+            <Metro:MetroTextBox
+                Grid.Column="1"
+                Margin="110,10,10,0"
+                InputHint="{DynamicResource viewtitleHint}"
+                PopupHint="{DynamicResource viewtitleHint}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Height="36"
+                VerticalContentAlignment="Center"
+                Name="viewtitle"
+                Text="{Binding Viewtitle}"
+                Grid.Row="0"
+            />
+
+        </Grid>
+
+        <!--第八行-->
+        <Grid Grid.Row="7">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--项目类型文本-->
+            <Metro:AduFormLable Title="{DynamicResource projecttype}" Margin="40,-20,10,0" HorizontalAlignment="Left"/>
+
+            <!--项目类型下拉框-->
+            <Metro:AduComboBox Name="projecttype" SelectedValue="{Binding Projecttype}" HorizontalAlignment="Stretch"
+                                ItemsSource="{Binding Projecttypelist}" SelectedIndex="1"
+                                Margin="110,-20,10,0" VerticalAlignment="Center" />
+
+            <!--生成类型文本-->
+            <Metro:AduFormLable Title="{DynamicResource Outputtype}" Margin="40,-20,10,0" HorizontalAlignment="Left" Grid.Column="1"/>
+
+            <!--生成类型下拉框-->
+            <Metro:AduComboBox Name="outputtype" SelectedValue="{Binding Outputtype}" HorizontalAlignment="Stretch" Grid.Column="1"
+                                ItemsSource="{Binding Outputtypelist}" SelectedIndex="0"
+                                Margin="110,-20,10,0" VerticalAlignment="Center" />
+
+        </Grid>
+
+        <!--最后一行-->
+        <Grid Grid.Row="8">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!--生成按钮-->
+            <Button
+                Name="GenCode"
+                Margin="10"
+                Content="{DynamicResource generate}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Style="{StaticResource ButtonPrimary}"
+                Grid.Column="1"
+                Click="GenCode_Click"
+                Width="180"
+                Height="60"
+                hc:BorderElement.CornerRadius="30"
+                />
+        </Grid>
+    </Grid>
+</UserControl>

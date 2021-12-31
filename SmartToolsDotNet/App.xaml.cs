@@ -1,4 +1,7 @@
-﻿using Prism.DryIoc;
+﻿using DryIoc;
+using DryIoc.Microsoft.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Mvvm;
 using SmartToolsDotNet.Views;
@@ -39,5 +42,13 @@ namespace SmartToolsDotNet
         }
         #endregion
 
+        #region CreateContainerExtension
+        protected override IContainerExtension CreateContainerExtension()
+        {
+            var servicecollection = new ServiceCollection();
+
+            return new DryIocContainerExtension(new Container(CreateContainerRules()).WithDependencyInjectionAdapter(servicecollection));
+        }
+        #endregion
     }
 }
