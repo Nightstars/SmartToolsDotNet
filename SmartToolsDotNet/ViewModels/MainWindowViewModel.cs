@@ -33,10 +33,10 @@ namespace SmartToolsDotNet.ViewModels
         }
 
         //最大化图标设置
-        private string _icon = "WindowMaximize";
-        public string Icon {
-            get { return _icon; }
-            set { SetProperty(ref _icon, value); }
+        private string _maxIcon = "WindowMaximize";
+        public string MaxIcon {
+            get { return _maxIcon; }
+            set { SetProperty(ref _maxIcon, value); }
         }
 
         public MainWindowViewModel(IRegionManager regionManager)
@@ -67,11 +67,11 @@ namespace SmartToolsDotNet.ViewModels
                 {
                     case WindowState.Normal:
                         SystemCommands.MaximizeWindow(win);
-                        Icon = "WindowRestore";
+                        MaxIcon = "WindowRestore";
                         break;
                     case WindowState.Maximized:
                         SystemCommands.RestoreWindow(win);
-                        Icon = "WindowMaximize";
+                        MaxIcon = "WindowMaximize";
                         break;
                 }
             });

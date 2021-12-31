@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:SmartToolsDotNet.Views.Common"
+             xmlns:local="clr-namespace:SmartToolsDotNet.Views.Common" xmlns:viewmodels="clr-namespace:SmartToolsDotNet.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -73,7 +73,7 @@
 
             <Grid Grid.Column="1">
                 <Button Height="30"
-                                    Background="{x:Null}"
+                                    Background="Transparent"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                         Command="{Binding MinCommand}"
@@ -91,21 +91,21 @@
 
             <Grid Grid.Column="2">
                 <Button Height="30"
-                                    Background="{x:Null}"
+                                    Background="Transparent"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Command="{Binding MaxCommand}"
                                     Padding="0">
                     <Viewbox Width="25"
                                          Height="25">
-                        <materialDesign:PackIcon Kind="{Binding Icon}" />
+                        <materialDesign:PackIcon Kind="{Binding MaxIcon}" Foreground="White"/>
                     </Viewbox>
                 </Button>
             </Grid>
 
             <Grid Grid.Column="3">
                 <Button Height="30"
-                                    Background="{x:Null}"
+                                    Background="Transparent"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                     Command="{Binding CloseCommand}"
