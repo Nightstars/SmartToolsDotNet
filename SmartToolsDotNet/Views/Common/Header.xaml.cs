@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmartToolsDotNet.Common
+namespace SmartToolsDotNet.Views.Common
 {
     /// <summary>
     /// Header.xaml 的交互逻辑

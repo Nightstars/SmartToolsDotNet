@@ -1,5 +1,6 @@
-﻿   using Prism.DryIoc;
+﻿using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Mvvm;
 using SmartToolsDotNet.Views;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace SmartToolsDotNet
         /// <param name="containerRegistry"></param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            //ViewModelLocationProvider.Register<Header, HeaderViewModel>();
         }
         #endregion
 

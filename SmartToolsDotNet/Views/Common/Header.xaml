@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="SmartToolsDotNet.Common.Header"
+﻿<UserControl x:Class="SmartToolsDotNet.Views.Common.Header"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:SmartToolsDotNet.Common"
+             xmlns:local="clr-namespace:SmartToolsDotNet.Views.Common"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -18,6 +18,33 @@
                         </Ellipse.Fill>
                     </Ellipse>-->
 
+        <Grid HorizontalAlignment="Left" Width="150" Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"></ColumnDefinition>
+                <ColumnDefinition Width="125"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Ellipse Cursor="Hand"
+                             HorizontalAlignment="Left"
+                             Width="25"
+                             Height="25">
+                    <Ellipse.Fill>
+                        <ImageBrush  ImageSource="https://mspoweruser.com/wp-content/uploads/2020/10/Microsoft-Bing-logo.jpg" />
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <TextBlock VerticalAlignment="Center"
+                           Padding="5,0,0,0"
+                           Text="{Binding Title}"
+                           FontWeight="Medium"
+                           ></TextBlock>
+            </Grid>
+
+        </Grid>
+
         <Grid HorizontalAlignment="Right"
                           Width="150">
             <Grid.ColumnDefinitions>
@@ -26,8 +53,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <Grid Grid.Column="0">
-                <Button Height="30"
+                <!--<Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
@@ -40,13 +68,15 @@
                                               Fill="White" />
                         </Canvas>
                     </Viewbox>
-                </Button>
+                </Button>-->
             </Grid>
+
             <Grid Grid.Column="1">
                 <Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                        Command="{Binding MinCommand}"
                                     Padding="0">
                     <Viewbox Width="25"
                                          Height="25">
@@ -58,22 +88,21 @@
                     </Viewbox>
                 </Button>
             </Grid>
+
             <Grid Grid.Column="2">
                 <Button Height="30"
                                     Background="{x:Null}"
                                     BorderBrush="{x:Null}"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                    Command="{Binding MaxCommand}"
                                     Padding="0">
                     <Viewbox Width="25"
                                          Height="25">
-                        <Canvas Width="24"
-                                            Height="24">
-                            <Path Data="M4,4H20V20H4V4M6,8V18H18V8H6Z"
-                                              Fill="White" />
-                        </Canvas>
+                        <materialDesign:PackIcon Kind="{Binding Icon}" />
                     </Viewbox>
                 </Button>
             </Grid>
+
             <Grid Grid.Column="3">
                 <Button Height="30"
                                     Background="{x:Null}"
