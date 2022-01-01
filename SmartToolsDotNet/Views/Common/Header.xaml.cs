@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartToolsDotNet.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace SmartToolsDotNet.Views.Common
         public Header()
         {
             InitializeComponent();
+            new ControlUtil().HideBoundingBox(this);
         }
         #endregion
     }

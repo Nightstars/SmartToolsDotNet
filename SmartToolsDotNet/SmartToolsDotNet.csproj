@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\icon\micon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,10 @@
     <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.details.tpl" />
     <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.edit.tpl" />
     <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.Index.tpl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icon\micon.ico" />
   </ItemGroup>
 
   <ItemGroup>
