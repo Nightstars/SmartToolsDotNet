@@ -21,7 +21,9 @@
                 </TabItem.Header>
 
                 <Grid Margin="5,5,5,5">
-                    <TextBlock Text="1"></TextBlock>
+                    <Border BorderBrush="{StaticResource DefaultBorderBrush}" BorderThickness="0,0,0,0">
+                        <ContentControl x:Name="codeless"></ContentControl>
+                    </Border>
                 </Grid>
             </TabItem>
 

@@ -9,17 +9,12 @@ using System.Windows;
 
 namespace SmartToolsDotNet.ViewModels
 {
-    internal class UserControl1ViewModel : BindableBase
+    internal class ContentViewModel : BindableBase
     {
         #region initialzie
-        public DelegateCommand TestCommond { get; set; }
-
-        public UserControl1ViewModel()
+        public ContentViewModel()
         {
-            TestCommond = new DelegateCommand(() =>
-            {
-                MessageBox.Show("test");
-            });
+
         }
         #endregion
     }

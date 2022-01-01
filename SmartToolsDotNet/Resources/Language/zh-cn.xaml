@@ -9,10 +9,11 @@
     <system:String x:Key="database">数据库</system:String>
     <system:String x:Key="dbtable">数据库表</system:String>
     <system:String x:Key="rootnamespace">命名空间</system:String>
+    <system:String x:Key="rootnamespacehint">填写命名空间</system:String>
     <system:String x:Key="generate">生成</system:String>
     <system:String x:Key="slnfile">解决方案</system:String>
-    <system:String x:Key="slnfileHint">请选择解决方案</system:String>
-    <system:String x:Key="selectfile">选择</system:String>
+    <system:String x:Key="slnfileHint">选择解决方案</system:String>
+    <system:String x:Key="selectfile">浏览</system:String>
     <system:String x:Key="project">项目</system:String>
     <system:String x:Key="projectarea">区域</system:String>
     <system:String x:Key="primarykey">业务主键</system:String>
@@ -23,5 +24,5 @@
         SmartTools.Net是SmartTools（长期致力于为开发者构建不限于C、C++、Go、Rust、C#、Java、SpringBoot、PHP、Android、小程序、Vue、React,Angular的免费版及专业版辅助工具）的Dotnet实现。</system:String>
     <system:String x:Key="viewtitle">视图标题</system:String>
     <system:String x:Key="basetype">基类类型</system:String>
-    <system:String x:Key="viewtitleHint">请输入视图标题</system:String>
+    <system:String x:Key="viewtitleHint">填写视图文件标题</system:String>
 </ResourceDictionary>

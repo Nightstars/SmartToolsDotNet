@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--xmlns:converts="clr-namespace:AduSkin.Controls.Converter;assembly=AduSkin">-->
+    <SolidColorBrush x:Key="DefaultBorderBrush" Color="#10000000" />
+</ResourceDictionary>

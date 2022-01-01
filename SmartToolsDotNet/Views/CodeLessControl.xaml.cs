@@ -1,8 +1,6 @@
-﻿using AduSkin.Controls.Metro;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 using SmartToolsDotNet.Services;
 using SmartToolsDotNet.Utils;
-using SmartToolsDotNet.Db;
 using SmartToolsDotNet.Models;
 using SmartToolsDotNet.ViewModel;
 using System;
@@ -32,6 +30,7 @@ namespace SmartToolsDotNet.Views
         {
             InitializeComponent();
             _currentLan = "zh-cn";
+            BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#52a9ff"));
             //this.Background = new ImageBrush() { ImageSource = FileUtil.GetImage("imgs.bg.png"), Stretch = Stretch.Fill, Opacity = 0.5 };
         }
         #endregion
@@ -40,7 +39,7 @@ namespace SmartToolsDotNet.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = codeLessVM;
-            codeLessVM.Projecttypelist = new List<string> { "wechat api", "cms" };
+            codeLessVM.Projecttypelist = new List<string> { "cms" };
             codeLessVM.Outputtypelist = new List<string> { "项目", "文件" };
             new ControlUtil().HideBoundingBox(this);
         }
@@ -98,8 +97,8 @@ namespace SmartToolsDotNet.Views
                 {
                     dbtables.SelectedIndex = -1;
                     dbtables.ItemsSource = null;
-                    primarykey.SelectedIndex = -1;
-                    primarykey.ItemsSource = null;
+                    //primarykey.SelectedIndex = -1;
+                    //primarykey.ItemsSource = null;
                 }
             }
             catch (Exception ex)

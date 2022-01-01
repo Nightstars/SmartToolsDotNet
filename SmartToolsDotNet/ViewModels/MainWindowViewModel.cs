@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using SmartToolsDotNet.Utils;
 using SmartToolsDotNet.Views;
 using SmartToolsDotNet.Views.Common;
 using System;
@@ -9,14 +10,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace SmartToolsDotNet.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         #region initialize
-        private string _title = "SmartToolsDotnet";
+        private string _title = "SmartToolsDotnet-Alpha 1.0";
         private readonly IRegionManager _regionManager;
+
+        private BitmapSource _appicon = FileUtil.GetImage("icon.icon.png");
 
         //关闭按钮
         public DelegateCommand CloseCommand { get; set; }
@@ -32,6 +36,11 @@ namespace SmartToolsDotNet.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        public BitmapSource AppIcon {
+            get { return _appicon; }
+            set { SetProperty(ref _appicon, value); }
+        }
+
         //最大化图标设置
         private string _maxIcon = "WindowMaximize";
         public string MaxIcon {
@@ -43,6 +52,7 @@ namespace SmartToolsDotNet.ViewModels
         {
             _regionManager = regionManager;
             _regionManager.RegisterViewWithRegion("contentRegion", typeof(UserControl1));
+            _regionManager.RegisterViewWithRegion("codelessRegion", typeof(CodeLessControl));
             _regionManager.RegisterViewWithRegion("headerRegion", typeof(Header));
 
             //关闭按钮逻辑

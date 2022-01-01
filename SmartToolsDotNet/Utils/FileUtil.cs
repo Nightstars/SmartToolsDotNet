@@ -13,7 +13,7 @@ namespace SmartToolsDotNet.Utils
     public static class FileUtil
     {
         #region initialize
-        public static string ResourcesPath = $"SmartTools.Net.Resources.";
+        public static string ResourcesPath = $"SmartToolsDotNet.Resources.";
 		#endregion
 
 		#region GetTmpContent
