@@ -14,17 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmartToolsDotNet.Views
+namespace CommonModule.Views
 {
     /// <summary>
-    /// UserControl1.xaml 的交互逻辑
+    /// Content.xaml 的交互逻辑
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class Content : UserControl
     {
-        public UserControl1()
+        public Content()
         {
             InitializeComponent();
 
+            RegionManager.SetRegionName(codelessHead, "codelessHeadRegion");
             RegionManager.SetRegionName(codeless, "codelessRegion");
         }
     }

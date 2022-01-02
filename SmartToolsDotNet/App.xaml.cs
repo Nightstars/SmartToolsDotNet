@@ -3,6 +3,7 @@ using DryIoc.Microsoft.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Modularity;
 using Prism.Mvvm;
 using SmartToolsDotNet.Views;
 using System;
@@ -39,6 +40,7 @@ namespace SmartToolsDotNet
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //ViewModelLocationProvider.Register<Header, HeaderViewModel>();
+            containerRegistry.RegisterForNavigation<CodeLessControl>();
         }
         #endregion
 
@@ -48,6 +50,13 @@ namespace SmartToolsDotNet
             var servicecollection = new ServiceCollection();
 
             return new DryIocContainerExtension(new Container(CreateContainerRules()).WithDependencyInjectionAdapter(servicecollection));
+        }
+        #endregion
+
+        #region CreateModuleCatalog
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            return new DirectoryModuleCatalog { ModulePath = @".\Paks"};
         }
         #endregion
     }

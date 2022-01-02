@@ -264,8 +264,8 @@ namespace SmartToolsDotNet.Views
         {
             if (codeLessVM.project != null)
             {
-                var path = codeLessVM.projectlist.Where(x => x.projName == codeLessVM.project).FirstOrDefault().projFullName;
-                codeLessVM.projectPath = $"{path.Substring(0, path.LastIndexOf("/"))}/Areas";
+                var path = codeLessVM?.projectlist?.Where(x => x.projName == codeLessVM.project)?.FirstOrDefault()?.projFullName;
+                codeLessVM.projectPath = $"{path?.Substring(0, path.LastIndexOf("/"))}/Areas";
                 codeLessVM.xmlpath = "App_Data";
                 codeLessVM.Arealist = new List<string>();
                 if (Directory.Exists(@$"{codeLessVM.slnfileaddr.Substring(0, codeLessVM.slnfileaddr.LastIndexOf("\\"))}\{codeLessVM.projectPath}"))
@@ -295,8 +295,8 @@ namespace SmartToolsDotNet.Views
             if (Directory.Exists(@$"{codeLessVM.slnfileaddr.Substring(0, codeLessVM.slnfileaddr.LastIndexOf("\\"))}\{codeLessVM.projectPath}"))
             {
                 codeLessVM.buildpath = @$"{codeLessVM.slnfileaddr.Substring(0, codeLessVM.slnfileaddr.LastIndexOf("\\"))}\{codeLessVM.projectPath}\{codeLessVM.projectArea}".Replace("\\","/");
-                var path = codeLessVM.projectlist.Where(x => x.projName == codeLessVM.project).FirstOrDefault().projName;
-                codeLessVM.Rootnamespace = $"{path.Substring(0, path.LastIndexOf("."))}.Areas.{codeLessVM.projectArea}";
+                var path = codeLessVM?.projectlist?.Where(x => x.projName == codeLessVM.project).FirstOrDefault()?.projName;
+                codeLessVM.Rootnamespace = $"{path?.Substring(0, path.LastIndexOf("."))}.Areas.{codeLessVM?.projectArea}";
             }
         }
         #endregion

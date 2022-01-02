@@ -1,5 +1,4 @@
-﻿using SmartToolsDotNet.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmartToolsDotNet.Views.Common
+namespace CodelessModule.Views
 {
     /// <summary>
-    /// Header.xaml 的交互逻辑
+    /// CodelessHead.xaml 的交互逻辑
     /// </summary>
-    public partial class Header : UserControl
+    public partial class CodelessHead : UserControl
     {
-        #region initialize
-        public Header()
+        public CodelessHead()
         {
             InitializeComponent();
-            new ControlUtil().HideBoundingBox(this);
         }
-        #endregion
     }
 }

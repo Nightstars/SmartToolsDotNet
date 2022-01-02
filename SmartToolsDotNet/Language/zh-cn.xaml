@@ -25,4 +25,8 @@
     <system:String x:Key="viewtitle">视图标题</system:String>
     <system:String x:Key="basetype">基类类型</system:String>
     <system:String x:Key="viewtitleHint">填写视图文件标题</system:String>
+    <system:String x:Key="commonmodule_codeless">Codeless</system:String>
+    <system:String x:Key="commonmodule_settings">设置</system:String>
+    <system:String x:Key="codelessmodule_simplepage">单 页 面</system:String>
+    <system:String x:Key="commonmodule_advancepage">表 头 表 体 页 面</system:String>
 </ResourceDictionary>
