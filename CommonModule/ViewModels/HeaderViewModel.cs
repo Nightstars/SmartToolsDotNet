@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using SmartToolsDotNet.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace CommonModule.ViewModels
 {
@@ -16,7 +18,7 @@ namespace CommonModule.ViewModels
         #region initialize
         private string _title = "SmartToolsDotnet-Alpha 1.0";
 
-        //private BitmapSource _appicon = FileUtil.GetImage("icon.icon.png");
+        private BitmapSource _appicon = FileUtil.GetImage("icon.icon.png");
 
         //关闭按钮
         public ICommand CloseCommand { get => new DelegateCommand<Object>(OnClose); }
@@ -33,11 +35,11 @@ namespace CommonModule.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        //public BitmapSource AppIcon
-        //{
-        //    get { return _appicon; }
-        //    set { SetProperty(ref _appicon, value); }
-        //}
+        public BitmapSource AppIcon
+        {
+            get { return _appicon; }
+            set { SetProperty(ref _appicon, value); }
+        }
 
         //最大化图标设置
         private string _maxIcon = "WindowMaximize";

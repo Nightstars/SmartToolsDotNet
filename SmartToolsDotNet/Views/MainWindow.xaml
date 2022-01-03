@@ -12,7 +12,16 @@
         WindowStyle="None"
         MinHeight="720" MinWidth="1080"
         Height="720" Width="1080"
+        WindowChrome.WindowChrome="{DynamicResource WindowChromeKey}"
         >
+    <Window.Resources>
+        <WindowChrome x:Key="WindowChromeKey">
+            <WindowChrome.ResizeBorderThickness>
+                <Thickness>5</Thickness>
+            </WindowChrome.ResizeBorderThickness>
+            <WindowChrome.CaptionHeight>0</WindowChrome.CaptionHeight>
+        </WindowChrome>
+    </Window.Resources>
     <Grid>
         <Border CornerRadius="10,10,10,10">
             <Grid>

@@ -1,13 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Resources\icon\micon.ico</ApplicationIcon>
-    <BaseOutputPath></BaseOutputPath>
-    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +28,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\icon\icon-white.png" />
     <EmbeddedResource Include="Resources\icon\icon.png" />
-    <EmbeddedResource Include="Resources\icon\micon.ico" />
     <EmbeddedResource Include="Resources\imgs\bg.png" />
     <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.controller.tpl" />
     <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.model.tpl" />
@@ -45,14 +40,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AduSkin" Version="1.1.1.9" />
-    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="5.1.0" />
-    <PackageReference Include="HandyControl" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
-    <PackageReference Include="SmartSoft.common" Version="1.1.7947" />
-    <PackageReference Include="SqlSugarCore" Version="5.0.5.1" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)$(SolutionName)\bin\Debug\net6.0-windows\Paks\&quot; /Y /S" />
+  </Target>
 
 </Project>

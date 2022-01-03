@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <BaseOutputPath></BaseOutputPath>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
