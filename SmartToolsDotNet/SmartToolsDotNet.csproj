@@ -45,7 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AduSkin" Version="1.1.1.9" />
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="5.1.0" />
     <PackageReference Include="HandyControl" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
