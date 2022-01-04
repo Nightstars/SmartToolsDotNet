@@ -9,8 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HandyControl" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="SmartSoft.common" Version="1.1.7947" />
+    <PackageReference Include="SqlSugarCore" Version="5.0.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="CustomControls\Loading.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
