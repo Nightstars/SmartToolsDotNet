@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:SmartToolsDotNet"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         Title="SmartToolsDotNet-Alpha"
         WindowStartupLocation="CenterScreen"
@@ -41,6 +42,8 @@
                 </Grid>
 
                 <Grid Grid.Row="1">
+
+                    <Button Content="test" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"></Button>
                     <ContentControl x:Name="content"></ContentControl>
                 </Grid>
             </Grid>

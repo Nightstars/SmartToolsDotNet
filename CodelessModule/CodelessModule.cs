@@ -12,6 +12,7 @@ namespace CodelessModule
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("codelessHeadRegion", typeof(CodelessHead));
+            regionManager.RegisterViewWithRegion("codelessRegion", typeof(CodeLess));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

@@ -1,4 +1,5 @@
-﻿using Prism.Regions;
+﻿using HandyControl.Controls;
+using Prism.Regions;
 using SmartToolsDotNet.Utils;
 using System.Windows;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ namespace SmartToolsDotNet.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         #region initialize
         private readonly IRegionManager _regionManager;
@@ -32,5 +33,10 @@ namespace SmartToolsDotNet.Views
             DragMove();
         }
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Growl.Success("文件保存成功！");
+        }
     }
 }

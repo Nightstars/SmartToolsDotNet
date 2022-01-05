@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\icon\boot.png" />
     <None Remove="Resources\icon\icon-white.png" />
     <None Remove="Resources\icon\icon.png" />
     <None Remove="Resources\icon\micon.ico" />
@@ -30,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SplashScreen Include="Resources\icon\boot.png" />
     <EmbeddedResource Include="Resources\icon\icon-white.png" />
     <EmbeddedResource Include="Resources\icon\icon.png" />
     <EmbeddedResource Include="Resources\icon\micon.ico" />

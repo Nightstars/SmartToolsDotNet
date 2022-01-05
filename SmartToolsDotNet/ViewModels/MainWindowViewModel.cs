@@ -18,7 +18,7 @@ namespace SmartToolsDotNet.ViewModels
         #region initialize
         public MainWindowViewModel(IRegionManager regionManager)
         {
-            regionManager.RegisterViewWithRegion("codelessRegion", typeof(CodeLessControl));
+            //regionManager.RegisterViewWithRegion("codelessRegion", typeof(CodeLessControl));
         }
         #endregion
     }
