@@ -53,20 +53,69 @@ namespace CodelessModule.Services
         public List<DbTableInfo> GetDbTableInfo(string database,string table)
         {
             string sql = $@"use {database}
-                            select
-                            A.name as tableName, --表名
-                            B.name as columnName, --列名
-                            C.value as columnDescription, --列名备注
-                            T.type,--类型
-                            T.length--长度
-                            from sys.tables A
-                            inner join sys.columns B on B.object_id = A.object_id
-                            left join sys.extended_properties C on C.major_id = B.object_id and C.minor_id = B.column_id
-                            inner join (SELECT syscolumns.name AS name,systypes.name AS type,syscolumns.length AS length 
-                             FROM syscolumns INNER JOIN systypes ON systypes.xtype=syscolumns.xtype
-                             WHERE id=(SELECT id FROM sysobjects WHERE  name='{table}' and systypes.name<> 'sysname')
-                            )T on T.name=B.name
-                            where A.name = '{table}'";
+                            SELECT
+							( CASE WHEN a.colorder= 1 THEN d.name ELSE NULL END ) tableName,
+							a.colorder, --列字段序号
+							a.name columnName,--列名
+							( CASE WHEN COLUMNPROPERTY( a.id, a.name, 'IsIdentity' ) = 1 THEN '1' ELSE '0' END ) IsIdentity,
+							(
+							CASE
+									WHEN (
+									SELECT COUNT
+										( * ) 
+									FROM
+										sysobjects 
+									WHERE
+										(
+											name IN (
+											SELECT
+												name 
+											FROM
+												sysindexes 
+											WHERE
+												( id = a.id ) 
+												AND (
+													indid IN (
+													SELECT
+														indid 
+													FROM
+														sysindexkeys 
+													WHERE
+														( id = a.id ) 
+														AND ( colid IN ( SELECT colid FROM syscolumns WHERE ( id = a.id ) AND ( name = a.name ) ) ) 
+													) 
+												) 
+											) 
+										) 
+										AND ( xtype = 'PK' ) 
+										) > 0 THEN
+										'1' ELSE '0' 
+									END 
+									) IsPK, --是否是主键
+									b.name type, --类型
+									a.length size, --占用空间（字节）
+									COLUMNPROPERTY( a.id, a.name, 'PRECISION' ) AS length, --长度
+									isnull( COLUMNPROPERTY( a.id, a.name, 'Scale' ), 0 ) AS Decimalplaces,
+								( CASE WHEN a.isnullable= 1 THEN '1' ELSE '0' END ) AllowNull,--是否允许为空
+							isnull( e.text, '' ) defaultvalue, --默认值
+							isnull( g.[value], ' ' ) AS columnDescription --列名备注 
+						FROM
+							syscolumns a
+							LEFT JOIN systypes b ON a.xtype= b.xusertype
+							INNER JOIN sysobjects d ON a.id= d.id 
+							AND d.xtype= 'U' 
+							AND d.name<> 'dtproperties'
+							LEFT JOIN syscomments e ON a.cdefault= e.id
+							LEFT JOIN sys.extended_properties g ON a.id= g.major_id 
+							AND a.colid= g.minor_id
+							LEFT JOIN sys.extended_properties f ON d.id= f.class 
+							AND f.minor_id= 0 
+						WHERE
+							d.name= '{table}' 
+						ORDER BY
+							a.id,
+							a.colorder
+						";
             return _db.Ado.SqlQuery<DbTableInfo>(sql);
         }
         #endregion

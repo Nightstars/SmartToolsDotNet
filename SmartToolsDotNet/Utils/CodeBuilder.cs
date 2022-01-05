@@ -735,7 +735,7 @@ namespace SmartToolsDotNet.Utils
 				}
 			}
 
-			//查询字段
+			//查询区域
 			StringBuilder queryArea = new StringBuilder();
 			if(_searchlist.Count > 0)
             {
@@ -764,7 +764,7 @@ namespace SmartToolsDotNet.Utils
 				}
 
 				//不足一行需占位
-				var residulist = _searchlist.Skip(totoalrows - residu).Take(residu);
+				var residulist = _searchlist.Skip((totoalrows -1) * 4).Take(residu);
 				queryArea.AppendLine("				<div class=\"layui-row\">");
 				foreach (var item in residulist)
 				{
