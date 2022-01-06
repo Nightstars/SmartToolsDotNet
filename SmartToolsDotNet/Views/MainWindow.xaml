@@ -33,17 +33,15 @@
 
                 <Grid Grid.Row="0">
                     <materialDesign:ColorZone Mode="PrimaryMid"
-                                              Name="NavBar"
-                                              Height="35"
-                                              MouseLeftButtonDown="NavBar_MouseLeftButtonDown"
-                                              materialDesign:ShadowAssist.ShadowDepth="Depth3">
+                            Name="NavBar"
+                            Height="35"
+                            MouseLeftButtonDown="NavBar_MouseLeftButtonDown"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0">
                         <ContentControl x:Name="header"></ContentControl>
                     </materialDesign:ColorZone>
                 </Grid>
 
                 <Grid Grid.Row="1">
-
-                    <Button Content="test" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"></Button>
                     <ContentControl x:Name="content"></ContentControl>
                 </Grid>
             </Grid>

@@ -26,8 +26,8 @@ namespace CommonModule.Views
         {
             InitializeComponent();
 
-            //RegionManager.SetRegionName(codelessHead, "codelessHeadRegion");
-            //RegionManager.SetRegionName(codeless, "codelessRegion");
+            RegionManager.SetRegionName(codelessHead, "codelessHeadRegion");
+            RegionManager.SetRegionName(codeless, "codelessRegion");
         }
 
         private void cmb_SelectionChanged(object sender, HandyControl.Data.FunctionEventArgs<object> e)

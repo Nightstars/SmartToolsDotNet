@@ -14,6 +14,8 @@ using CodelessModule.Services;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using System.Linq;
+using System.IO;
 
 namespace CodelessModule.ViewModels
 {
@@ -124,14 +126,27 @@ namespace CodelessModule.ViewModels
 
         #region 项目
         /// <summary>
-        /// 数据库
+        /// 项目
         /// </summary>
-        private string _project = string.Empty;
+        private string _project = String.Empty;
 
         public string Project
         {
             get { return _project; }
             set { SetProperty(ref _project, value); }
+        }
+
+        private int _selectedProjIndex;
+        public int SelectedProjIndex
+        {
+            get
+            {
+                return _selectedProjIndex;
+            }
+            set
+            {
+                SetProperty(ref _selectedProjIndex, value);
+            }
         }
         #endregion
 
@@ -314,27 +329,161 @@ namespace CodelessModule.ViewModels
         #endregion
 
         #region 连接数据库
-        public ICommand ConnectCommand { get => new DelegateCommand<Object>(OnConnect); }
+        public ICommand ConnectCommand { get => new DelegateCommand<object>(OnConnect); }
 
-        private void OnConnect(Object obj)
+        private void OnConnect(object obj)
         {
             Dialog? logading = null;
+
+            if (string.IsNullOrWhiteSpace(_connectString))
+            {
+                HandyControl.Controls.MessageBox.Error("数据库连接字符串不能为空!");
+                return;
+            }
+
             try
             {
                 logading = Dialog.Show(new Loading());
-                Growl.Success("文件保存成功！");
-                //_databaselist = new CodeLessService(_connectString).GetDatabase();
+                Databaselist = new CodeLessService(_connectString).GetDatabase();
+
+                Database = Databaselist.FirstOrDefault()?.name;
             }
             catch (Exception ex)
             {
-
-                throw;
+                HandyControl.Controls.MessageBox.Error(ex.Message);
             }
             finally
             {
                 logading?.Close();
             }
 
+        }
+        #endregion
+
+        #region 选择数据库
+        public ICommand DatabaseSelChangedCommand => new DelegateCommand<object>(OnDatabaseChange);
+
+        private void OnDatabaseChange(object obj)
+        {
+            var logading = Dialog.Show(new Loading());
+
+            if (string.IsNullOrWhiteSpace(_connectString))
+            {
+                HandyControl.Controls.MessageBox.Error("数据库连接字符串不能为空!");
+                return;
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_database))
+                {
+                    DbTables = new CodeLessService(_connectString).GetDbTable(_database);
+                    SearchParams = new List<DbTableInfo>();
+                }
+                else
+                {
+                    DbTable = String.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                HandyControl.Controls.MessageBox.Error(ex.Message);
+            }
+            finally
+            {
+                logading.Close();
+            }
+        }
+        #endregion
+
+        #region 选择表
+        public ICommand DbSelChangeCommand => new DelegateCommand<object>(OnDbSelChange);
+
+        private void OnDbSelChange(object obj)
+        {
+            if (!string.IsNullOrWhiteSpace(_dbTable))
+                DbTableInfos = new CodeLessService(_connectString).GetDbTableInfo(_database, _dbTable);
+            else
+                DbTableInfos = new List<DbTableInfo>();
+
+            SearchParams = new List<DbTableInfo>();
+        }
+        #endregion
+
+        #region 查询字段
+        public ICommand SearchparamSelChangeCommand => new DelegateCommand<List<DbTableInfo>> (OnSearchparamSelChange);
+
+        private void OnSearchparamSelChange(List<DbTableInfo> obj)
+        {
+            _searchParams = obj;
+        }
+        #endregion
+
+        #region 选择解决方案
+        public ICommand ChooseSlnCommand => new DelegateCommand<object>(OnChooseSln);
+
+        public void OnChooseSln(object ovj)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog()
+            {
+                Filter = "Solution Files (*.sln)|*.sln",
+                Title = "选择解决方案"
+
+            };
+            var result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                Arealist = new List<string>();
+                Rootnamespace = String.Empty;
+                Slnfileaddr = openFileDialog.FileName;
+                Projectlist = new SolutionUtil(_slnfileaddr).SlnParse();
+
+            }
+            else
+            {
+                HandyControl.Controls.MessageBox.Error("未选择任何解决方案!");
+            }
+        }
+        #endregion
+
+        #region 选择项目
+        public ICommand ProjSelChangeCommand => new DelegateCommand<string>(OnProjSelChange);
+
+        private void OnProjSelChange(string obj)
+        {
+            if (obj != null)
+            {
+                var path = _projectlist?.Where(x => x.projName == obj)?.FirstOrDefault()?.projFullName;
+                _projectPath = $"{path?.Substring(0, path.LastIndexOf("/"))}/Areas";
+                _xmlpath = "App_Data";
+
+                if (Directory.Exists(@$"{_slnfileaddr.Substring(0, _slnfileaddr.LastIndexOf("\\"))}\{_projectPath}"))
+                {
+                    DirectoryInfo directoryInfo = new DirectoryInfo(@$"{_slnfileaddr.Substring(0, _slnfileaddr.LastIndexOf("\\"))}\{_projectPath}");
+                    var files = directoryInfo.GetDirectories();
+                    List<string> areas = new List<string>();
+                    foreach (var file in files)
+                    {
+                        areas.Add(file.Name);
+                    }
+                    Arealist = areas;
+
+                }
+            }
+        }
+        #endregion
+
+        #region 选择区域
+        public ICommand ProjAreaSelChangeCommand => new DelegateCommand<Object>(OnProjAreaSelChange);
+
+        private void OnProjAreaSelChange(Object obj)
+        {
+            if (Directory.Exists(@$"{_slnfileaddr.Substring(0, _slnfileaddr.LastIndexOf("\\"))}\{_projectPath}"))
+            {
+                _buildpath = @$"{_slnfileaddr.Substring(0, _slnfileaddr.LastIndexOf("\\"))}\{_projectPath}\{_projectArea}".Replace("\\", "/");
+                var path = _projectlist?.Where(x => x.projName == _project).FirstOrDefault()?.projName;
+                Rootnamespace = $"{path?.Substring(0, path.LastIndexOf("."))}.Areas.{_projectArea}";
+            }
         }
         #endregion
     }

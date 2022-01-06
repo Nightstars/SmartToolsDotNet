@@ -21,11 +21,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <materialDesign:Card
+        <!--<materialDesign:Card
         Padding="8"
         Margin="25,5,25,25"
         UniformCornerRadius="6">
 
-        </materialDesign:Card>
+        </materialDesign:Card>-->
     </Grid>
 </UserControl>

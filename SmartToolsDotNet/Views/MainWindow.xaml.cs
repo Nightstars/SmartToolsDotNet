@@ -34,9 +34,5 @@ namespace SmartToolsDotNet.Views
         }
         #endregion
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Growl.Success("文件保存成功！");
-        }
     }
 }

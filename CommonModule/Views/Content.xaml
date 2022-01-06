@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CommonModule.Views"
+             xmlns:mycontrol="clr-namespace:CommonModule.Utils"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
@@ -11,6 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/CommonModule;component/Resources/colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
@@ -22,11 +24,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <ScrollViewer>
-        <!--<TabControl
+        <!--<ScrollViewer>-->
+        <TabControl
           Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
           materialDesign:ColorZoneAssist.Mode="Standard"
-          materialDesign:ShadowAssist.ShadowDepth="Depth2">
+          materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
 
             <TabItem>
@@ -62,17 +64,53 @@
                 </TabItem.Header>
             </TabItem>
 
-            </TabControl>-->
+            </TabControl>
 
-            <hc:SideMenu BorderThickness="1" Width="200" Margin="10" SelectionChanged="cmb_SelectionChanged" >
+
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <hc:SideMenu BorderThickness="1" Width="200" x:Name="test">
                 <hc:SideMenu.Resources>
-                    <Color x:Key="PrimaryColor">#1C93EC</Color>
-                    <Color x:Key="DarkPrimaryColor">#1C93EC</Color>
+                    <Color x:Key="PrimaryColor">#FFD80073</Color>
+                    <Color x:Key="DarkPrimaryColor">#FFD80073</Color>
                     <LinearGradientBrush x:Key="PrimaryBrush" EndPoint="1,0" StartPoint="0,0">
                         <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
                         <GradientStop Color="{DynamicResource DarkPrimaryColor}" Offset="1"/>
                     </LinearGradientBrush>
-                </hc:SideMenu.Resources>
+                </hc:SideMenu.Resources>-->
+
+
+            <!--<hc:SideMenu.ItemContainerStyle>
+                <Style TargetType="hc:SideMenuItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="hc:SideMenuItem">
+
+                                <StackPanel Height="45" Orientation="Horizontal" Background="Transparent" Name="Container" Cursor="Hand">
+                                    <Rectangle Fill="#1C93EC" VerticalAlignment="Stretch" Width="5" Visibility="Hidden" Name="LeftSideRectangle"></Rectangle>
+                                    <Image Source="pack://application:,,,/CommonModule;component/Images/CircularMenu/2.png" Width="24" Height="24"/>
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="LeftSideRectangle"></Setter>
+                                        <Setter Property="Background" Value="#f2f2f2" TargetName="Container"></Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="LeftSideRectangle"></Setter>
+                                        <Setter Property="Background" Value="#f2f2f2" TargetName="Container"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </hc:SideMenu.ItemContainerStyle>-->
+
 
                 <!--<i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
@@ -80,48 +118,70 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>-->
 
-                <hc:SideMenuItem Header="Overview">
+                <!--<hc:SideMenuItem Header="Codeless">
                     <hc:SideMenuItem.Icon>
-                        <Image Source="pack://application:,,,/Resource/Image/DevOps/DevOps-Boards.png" Width="24" Height="24"/>
+                        <Image Source="pack://application:,,,/CommonModule;component/Images/CircularMenu/2.png" Width="24" Height="24"/>
                     </hc:SideMenuItem.Icon>
-                    <hc:SideMenuItem Header="Summary" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xe604;"  Style="{StaticResource TextBlockSubTitle}"/>
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
-                    <hc:SideMenuItem Header="Dashboards" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xe603;"  Style="{StaticResource TextBlockSubTitle}"/>
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
-                    <hc:SideMenuItem Header="Wiki" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xe602;"  Style="{StaticResource TextBlockSubTitle}"/>
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
-                    <hc:SideMenuItem Header="Wiki" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xe601;"  Style="{StaticResource TextBlockSubTitle}"/>
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
                 </hc:SideMenuItem>
-                <hc:SideMenuItem Header="Boards">
-                    <hc:SideMenuItem.Icon>
-                        <Image Source="pack://application:,,,/Resource/Image/DevOps/DevOps-Pipelines.png" Width="24" Height="24"/>
-                    </hc:SideMenuItem.Icon>
-                    <hc:SideMenuItem Header="Sprints">
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xe600;"  Style="{StaticResource TextBlockSubTitle}"/>
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
-                    <hc:SideMenuItem Header="Queries">
-                        <hc:SideMenuItem.Icon>
-                            <TextBlock Text="&#xe67f;"  Style="{StaticResource TextBlockSubTitle}"/>
-                        </hc:SideMenuItem.Icon>
-                    </hc:SideMenuItem>
-                </hc:SideMenuItem>
-            </hc:SideMenu>
 
-        </ScrollViewer>
+            <hc:SideMenuItem Header="Overview">
+                <hc:SideMenuItem.Icon>
+                    <Image Source="pack://application:,,,/CommonModule;component/Images/CircularMenu/1.png" Width="24" Height="24"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+
+        </hc:SideMenu>-->
+
+        <!--<Rectangle Fill="White"></Rectangle>
+        <ListBox Margin="0 50 0 0" Background="Transparent" Foreground="Black" BorderThickness="0" FontSize="16" Name="haha">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <StackPanel Height="45" Orientation="Horizontal" Background="Transparent" Name="Container" Cursor="Hand">
+                                    <Rectangle Fill="#1C93EC" VerticalAlignment="Stretch" Width="5" Visibility="Hidden" Name="LeftSideRectangle"></Rectangle>
+                                    <ContentPresenter VerticalAlignment="Center" Margin="15 0 0 0"></ContentPresenter>
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="LeftSideRectangle"></Setter>
+                                        <Setter Property="Background" Value="#f2f2f2" TargetName="Container"></Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="LeftSideRectangle"></Setter>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="ListBox"></Setter>
+                                        <Setter Property="Background" Value="#f2f2f2" TargetName="Container"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBoxItem Content="ONE"></ListBoxItem>
+            <ListBoxItem Content="TWO"></ListBoxItem>
+            <ListBoxItem Content="THREE"></ListBoxItem>
+            <ListBoxItem Content="FOUR"></ListBoxItem>
+            <ListBoxItem Content="FIVE"></ListBoxItem>
+        </ListBox>-->
+
+        <!--<Grid Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <ContentControl x:Name="codelessHead"></ContentControl>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <ContentControl x:Name="codeless"></ContentControl>
+                </Grid>-->
+            <!--</Grid>-->
+        <!--</Grid>-->
+        <!--</ScrollViewer>-->
     </Grid>
 </UserControl>
