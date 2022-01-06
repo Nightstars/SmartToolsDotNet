@@ -86,6 +86,7 @@
                     materialDesign:ButtonAssist.CornerRadius="5"
                     ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
                     Content="{DynamicResource connectDb}"
+                            Command="{Binding ConnectCommand}"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                     </Grid>
@@ -181,7 +182,7 @@
                                   Style="{StaticResource CheckComboBoxBaseStyle}" Margin="110,10,10,0">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding SearchparamSelChangeCommand}" CommandParameter="{Binding ElementName=searchparam,Path=SelectedItems}"/>
+                                    <i:InvokeCommandAction Command="{Binding SearchparamSelChangeCommand}" CommandParameter="{Binding ElementName=searchparam,Path=SelectedValue}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </hc:CheckComboBox>

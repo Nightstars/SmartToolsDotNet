@@ -245,9 +245,9 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 查询字段
         /// </summary>
-        private List<DbTableInfo> _searchParams = new List<DbTableInfo>();
+        private List<string> _searchParams = new List<string>();
 
-        public List<DbTableInfo> SearchParams
+        public List<string> SearchParams
         {
             get { return _searchParams; }
             set { SetProperty(ref _searchParams, value); }
@@ -378,7 +378,7 @@ namespace CodelessModule.ViewModels
                 if (!string.IsNullOrWhiteSpace(_database))
                 {
                     DbTables = new CodeLessService(_connectString).GetDbTable(_database);
-                    SearchParams = new List<DbTableInfo>();
+                    SearchParams = new List<string>();
                 }
                 else
                 {
@@ -406,14 +406,14 @@ namespace CodelessModule.ViewModels
             else
                 DbTableInfos = new List<DbTableInfo>();
 
-            SearchParams = new List<DbTableInfo>();
+            SearchParams = new List<string>();
         }
         #endregion
 
         #region 查询字段
-        public ICommand SearchparamSelChangeCommand => new DelegateCommand<List<DbTableInfo>> (OnSearchparamSelChange);
+        public ICommand SearchparamSelChangeCommand => new DelegateCommand<List<string>> (OnSearchparamSelChange);
 
-        private void OnSearchparamSelChange(List<DbTableInfo> obj)
+        private void OnSearchparamSelChange(List<string> obj)
         {
             _searchParams = obj;
         }

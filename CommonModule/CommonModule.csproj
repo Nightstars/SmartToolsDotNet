@@ -8,27 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\CircularMenu\1.png" />
-    <None Remove="Images\CircularMenu\2.png" />
-    <None Remove="Images\CircularMenu\3.png" />
-    <None Remove="Images\CircularMenu\4.png" />
-    <None Remove="Images\CircularMenu\5.png" />
-    <None Remove="Images\CircularMenu\6.png" />
-    <None Remove="Images\CircularMenu\7.png" />
-    <None Remove="Images\CircularMenu\8.png" />
+    <Compile Remove="Images\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <None Remove="Images\**" />
+    <Page Remove="Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\icon\icon.png" />
     <None Remove="Resources\imgs\2.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\CircularMenu\1.png" />
-    <Resource Include="Images\CircularMenu\2.png" />
-    <Resource Include="Images\CircularMenu\3.png" />
-    <Resource Include="Images\CircularMenu\4.png" />
-    <Resource Include="Images\CircularMenu\5.png" />
-    <Resource Include="Images\CircularMenu\6.png" />
-    <Resource Include="Images\CircularMenu\7.png" />
-    <Resource Include="Images\CircularMenu\8.png" />
     <Resource Include="Resources\imgs\2.png" />
     <EmbeddedResource Include="Resources\icon\icon.png" />
   </ItemGroup>
