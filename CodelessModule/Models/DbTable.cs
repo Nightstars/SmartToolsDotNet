@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodelessModule.Models
 {
-    class DbTable
+    public class DbTable
     {
         /// <summary>
         /// 表名

@@ -4,28 +4,33 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Prism.Mvvm;
+using System.Windows.Input;
+using Prism.Commands;
+using HandyControl.Controls;
+using CodelessModule.CustomControls;
+using System.Runtime.Versioning;
+using CodelessModule.Services;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace CodelessModule.ViewModels
 {
-    public class CodeLessViewModel : INotifyPropertyChanged
+    [SupportedOSPlatform("windows7.0")]
+    public class CodeLessViewModel : BindableBase
     {
-        #region initiazlize
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void Notify([CallerMemberName] string obj = "")
-        {
-            if (PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(obj));
-            }
-        }
-        #endregion
-
         #region 数据库列表
         /// <summary>
         /// 数据库列表
         /// </summary>
-        public List<DataBaseInfo> databaselist { get; set; }
+        private List<DataBaseInfo> _databaselist = new List<DataBaseInfo>();
+
+        public List<DataBaseInfo> Databaselist
+        {
+            get { return _databaselist; }
+            set { SetProperty(ref _databaselist, value); }
+        }
         #endregion
 
         #region 数据库连接字符串
@@ -33,12 +38,12 @@ namespace CodelessModule.ViewModels
         /// 数据库连接字符串
         /// </summary>
         //public String connectString= "Database=CMS;Server=127.0.0.1,6666;User ID = sa; Password = Ihavenoidea@0;";
-        public String connectString= "Database=CMS;Server=192.168.2.52,63765;User ID = sa; Password = Longnows2021;";
+        private string _connectString = string.Empty;
 
         public string ConnectionString
         {
-            get{ return connectString; }
-            set{ connectString = value; Notify(); }
+            get{ return _connectString; }
+            set { SetProperty(ref _connectString, value); }
         }
         #endregion
 
@@ -46,12 +51,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 数据库
         /// </summary>
-        public String database = "";
+        private string _database = string.Empty;
 
         public string Database
         {
-            get { return database; }
-            set { database = value; Notify(); }
+            get { return _database; }
+            set { SetProperty(ref _database, value); }
         }
         #endregion
 
@@ -59,12 +64,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 命名空间
         /// </summary>
-        public String _rootnamespace = "";
+        private string _rootnamespace = string.Empty;
 
         public string Rootnamespace
         {
             get { return _rootnamespace; }
-            set { _rootnamespace = value; Notify(); }
+            set { SetProperty(ref _rootnamespace, value); }
         }
         #endregion
 
@@ -72,12 +77,22 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 数据库表
         /// </summary>
-        public String dbTable = "";
+        private string _dbTable = string.Empty;
 
         public string DbTable
         {
-            get { return dbTable; }
-            set { dbTable = value; Notify(); }
+            get { return _dbTable; }
+            set { SetProperty(ref _dbTable, value); }
+        }
+        #endregion
+
+        #region 数据库表列表
+        private List<DbTable> _dbTables = new List<DbTable>();
+
+        public List<DbTable> DbTables
+        {
+            get { return _dbTables; }
+            set { SetProperty(ref _dbTables, value); }
         }
         #endregion
 
@@ -85,12 +100,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 解决方案地址
         /// </summary>
-        public String slnfileaddr = "";
+        private string _slnfileaddr = string.Empty;
 
         public string Slnfileaddr
         {
-            get { return slnfileaddr; }
-            set { slnfileaddr = value; Notify(); }
+            get { return _slnfileaddr; }
+            set { SetProperty(ref _slnfileaddr, value); }
         }
         #endregion
 
@@ -98,12 +113,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 项目列表
         /// </summary>
-        public List<SolutionInfo> projectlist { get; set; }
+        private List<SolutionInfo> _projectlist = new List<SolutionInfo>();
 
         public List<SolutionInfo> Projectlist
         {
-            get { return projectlist; }
-            set { projectlist = value; Notify(); }
+            get { return _projectlist; }
+            set { SetProperty(ref _projectlist, value); }
         }
         #endregion
 
@@ -111,12 +126,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 数据库
         /// </summary>
-        public String project = "";
+        private string _project = string.Empty;
 
         public string Project
         {
-            get { return project; }
-            set { project = value; Notify(); }
+            get { return _project; }
+            set { SetProperty(ref _project, value); }
         }
         #endregion
 
@@ -124,12 +139,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 项目区域
         /// </summary>
-        public String projectArea = "";
+        private string _projectArea = string.Empty;
 
         public string ProjectArea
         {
-            get { return projectArea; }
-            set { projectArea = value; Notify(); }
+            get { return _projectArea; }
+            set { SetProperty(ref _projectArea, value); }
         }
         #endregion
 
@@ -137,26 +152,38 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 项目地址
         /// </summary>
-        public String projectPath  { get;set; }
+        private string _projectPath = string.Empty;
+
+        public string ProjectPath
+        {
+            get { return _projectPath; }
+            set { SetProperty(ref _projectPath, value); }
+        }
         #endregion
 
         #region XML配置地址
         /// <summary>
         /// 项目地址
         /// </summary>
-        public String xmlpath { get; set; }
+        private string _xmlpath = string.Empty;
+
+        public  string Xmlpath
+        {
+            get { return _xmlpath; }
+            set { SetProperty(ref _xmlpath, value); }
+        }
         #endregion
 
         #region 区域列表
         /// <summary>
         /// 项目列表
         /// </summary>
-        public List<string> arealist { get; set; }
+        private List<string> _arealist = new List<string>();
 
         public List<string> Arealist
         {
-            get { return arealist; }
-            set { arealist = value; Notify(); }
+            get { return _arealist; }
+            set { SetProperty(ref _arealist, value); }
         }
         #endregion
 
@@ -164,19 +191,25 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 生成目录
         /// </summary>
-        public String buildpath { get; set; }
+        private string _buildpath = string.Empty;
+
+        public string Buildpath
+        {
+            get { return _buildpath; }
+            set { SetProperty(ref _buildpath, value); }
+        }
         #endregion
 
         #region 业务主键
         /// <summary>
         /// 业务主键
         /// </summary>
-        public String primarykey = "";
+        private string _primarykey = string.Empty;
 
         public string Primarykey
         {
-            get { return primarykey; }
-            set { primarykey = value; Notify(); }
+            get { return _primarykey; }
+            set { SetProperty(ref _primarykey, value); }
         }
         #endregion
 
@@ -184,12 +217,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 项目列表
         /// </summary>
-        public List<DbTableInfo> dbTableInfos { get; set; }
+        private List<DbTableInfo> _dbTableInfos = new List<DbTableInfo>();
 
         public List<DbTableInfo> DbTableInfos
         {
-            get { return dbTableInfos; }
-            set { dbTableInfos = value; Notify(); }
+            get { return _dbTableInfos; }
+            set { SetProperty(ref _dbTableInfos, value); }
         }
         #endregion
 
@@ -197,19 +230,25 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 查询字段
         /// </summary>
-        public List<DbTableInfo> searchParams { get; set; }
+        private List<DbTableInfo> _searchParams = new List<DbTableInfo>();
+
+        public List<DbTableInfo> SearchParams
+        {
+            get { return _searchParams; }
+            set { SetProperty(ref _searchParams, value); }
+        }
         #endregion
 
         #region 项目类型列表
         /// <summary>
         /// 项目列表
         /// </summary>
-        public List<string> projecttypelist { get; set; }
+        private List<string> _projecttypelist = new List<string>();
 
         public List<string> Projecttypelist
         {
-            get { return projecttypelist; }
-            set { projecttypelist = value; Notify(); }
+            get { return _projecttypelist; }
+            set { SetProperty(ref _projecttypelist, value); }
         }
         #endregion
 
@@ -217,12 +256,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 数据库
         /// </summary>
-        public String projecttype = "";
+        private string _projecttype = string.Empty;
 
         public string Projecttype
         {
-            get { return projecttype; }
-            set { projecttype = value; Notify(); }
+            get { return _projecttype; }
+            set { SetProperty(ref _projecttype, value); }
         }
         #endregion
 
@@ -230,12 +269,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 项目列表
         /// </summary>
-        public List<string> outputtypelist { get; set; }
+        private List<string> _outputtypelist = new List<string>();
 
         public List<string> Outputtypelist
         {
-            get { return outputtypelist; }
-            set { outputtypelist = value; Notify(); }
+            get { return _outputtypelist; }
+            set { SetProperty(ref _outputtypelist, value); }
         }
         #endregion
 
@@ -243,38 +282,12 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 数据库
         /// </summary>
-        public String outputtype = "";
+        private string _outputtype = string.Empty;
 
         public string Outputtype
         {
-            get { return outputtype; }
-            set { outputtype = value; Notify(); }
-        }
-        #endregion
-
-        #region 基类类型列表
-        /// <summary>
-        /// 基类类型列表
-        /// </summary>
-        public List<string> basetypelist { get; set; }
-
-        public List<string> Basetypelist
-        {
-            get { return basetypelist; }
-            set { basetypelist = value; Notify(); }
-        }
-        #endregion
-
-        #region 基类类型
-        /// <summary>
-        /// 基类类型
-        /// </summary>
-        public String basetype = "";
-
-        public string Basetype
-        {
-            get { return basetype; }
-            set { basetype = value; Notify(); }
+            get { return _outputtype; }
+            set { SetProperty(ref _outputtype, value); }
         }
         #endregion
 
@@ -282,12 +295,46 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 视图标题
         /// </summary>
-        public String viewtitle = "";
+        private string _viewtitle = string.Empty;
 
         public string Viewtitle
         {
-            get { return viewtitle; }
-            set { viewtitle = value; Notify(); }
+            get { return _viewtitle; }
+            set { SetProperty(ref _viewtitle, value); }
+        }
+        #endregion
+
+        #region initialize
+        public CodeLessViewModel()
+        {
+            _projecttypelist = new List<string> { "cms" };
+            _outputtypelist = new List<string> { "项目", "文件" };
+            _connectString = "Database=CMS;Server=192.168.2.52,63765;User ID = sa; Password = Longnows2021;";
+        }
+        #endregion
+
+        #region 连接数据库
+        public ICommand ConnectCommand { get => new DelegateCommand<Object>(OnConnect); }
+
+        private void OnConnect(Object obj)
+        {
+            Dialog? logading = null;
+            try
+            {
+                logading = Dialog.Show(new Loading());
+                Growl.Success("文件保存成功！");
+                //_databaselist = new CodeLessService(_connectString).GetDatabase();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                logading?.Close();
+            }
+
         }
         #endregion
     }
