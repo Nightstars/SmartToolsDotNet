@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:CommonModule.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -14,15 +15,19 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#1C93EC" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TabControl
+        <ScrollViewer>
+        <!--<TabControl
           Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
           materialDesign:ColorZoneAssist.Mode="Standard"
           materialDesign:ShadowAssist.ShadowDepth="Depth2">
+
 
             <TabItem>
                 <TabItem.Header>
@@ -57,7 +62,66 @@
                 </TabItem.Header>
             </TabItem>
 
+            </TabControl>-->
 
-        </TabControl>
+            <hc:SideMenu BorderThickness="1" Width="200" Margin="10" SelectionChanged="cmb_SelectionChanged" >
+                <hc:SideMenu.Resources>
+                    <Color x:Key="PrimaryColor">#1C93EC</Color>
+                    <Color x:Key="DarkPrimaryColor">#1C93EC</Color>
+                    <LinearGradientBrush x:Key="PrimaryBrush" EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
+                        <GradientStop Color="{DynamicResource DarkPrimaryColor}" Offset="1"/>
+                    </LinearGradientBrush>
+                </hc:SideMenu.Resources>
+
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <command:EventToCommand Command="{Binding SwitchItemCmd}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+
+                <hc:SideMenuItem Header="Overview">
+                    <hc:SideMenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resource/Image/DevOps/DevOps-Boards.png" Width="24" Height="24"/>
+                    </hc:SideMenuItem.Icon>
+                    <hc:SideMenuItem Header="Summary" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe604;"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="Dashboards" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe603;"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="Wiki" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe602;"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="Wiki" Command="{Binding SelectCmd}" CommandParameter="{Binding Header,RelativeSource={RelativeSource Self}}">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe601;"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                </hc:SideMenuItem>
+                <hc:SideMenuItem Header="Boards">
+                    <hc:SideMenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resource/Image/DevOps/DevOps-Pipelines.png" Width="24" Height="24"/>
+                    </hc:SideMenuItem.Icon>
+                    <hc:SideMenuItem Header="Sprints">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe600;"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                    <hc:SideMenuItem Header="Queries">
+                        <hc:SideMenuItem.Icon>
+                            <TextBlock Text="&#xe67f;"  Style="{StaticResource TextBlockSubTitle}"/>
+                        </hc:SideMenuItem.Icon>
+                    </hc:SideMenuItem>
+                </hc:SideMenuItem>
+            </hc:SideMenu>
+
+        </ScrollViewer>
     </Grid>
 </UserControl>

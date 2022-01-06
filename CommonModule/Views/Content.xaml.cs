@@ -1,4 +1,5 @@
-﻿using Prism.Regions;
+﻿using HandyControl.Controls;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,17 @@ namespace CommonModule.Views
         {
             InitializeComponent();
 
-            RegionManager.SetRegionName(codelessHead, "codelessHeadRegion");
-            RegionManager.SetRegionName(codeless, "codelessRegion");
+            //RegionManager.SetRegionName(codelessHead, "codelessHeadRegion");
+            //RegionManager.SetRegionName(codeless, "codelessRegion");
+        }
+
+        private void cmb_SelectionChanged(object sender, HandyControl.Data.FunctionEventArgs<object> e)
+        {
+            var item = e?.Info as SideMenuItem;
+
+            //item.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2786E4"));
+
+            //System.Windows.MessageBox.Show((e?.Info as SideMenuItem)?.Header?.ToString());
         }
     }
 }
