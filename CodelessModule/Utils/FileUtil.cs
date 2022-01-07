@@ -13,7 +13,7 @@ namespace CodelessModule.Utils
     public static class FileUtil
     {
         #region initialize
-        public static string ResourcesPath = $"SmartToolsDotNet.Resources.";
+        public static string ResourcesPath = $"CodelessModule.Resources.";
 		#endregion
 
 		#region GetTmpContent

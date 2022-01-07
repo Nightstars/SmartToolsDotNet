@@ -16,6 +16,10 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Linq;
 using System.IO;
+using CodelessModule.Utils;
+using System.Diagnostics;
+using Prism.Events;
+using CodelessModule.Events;
 
 namespace CodelessModule.ViewModels
 {
@@ -245,9 +249,9 @@ namespace CodelessModule.ViewModels
         /// <summary>
         /// 查询字段
         /// </summary>
-        private List<string> _searchParams = new List<string>();
+        private List<DbTableInfo> _searchParams = new List<DbTableInfo>();
 
-        public List<string> SearchParams
+        public List<DbTableInfo> SearchParams
         {
             get { return _searchParams; }
             set { SetProperty(ref _searchParams, value); }
@@ -320,8 +324,11 @@ namespace CodelessModule.ViewModels
         #endregion
 
         #region initialize
-        public CodeLessViewModel()
+        private IEventAggregator _ea;
+        public CodeLessViewModel(IEventAggregator ea)
         {
+            _ea = ea;
+            _ea.GetEvent<SearchParamChangedEvent>().Subscribe(MessageReceived);
             _projecttypelist = new List<string> { "cms" };
             _outputtypelist = new List<string> { "项目", "文件" };
             _connectString = "Database=CMS;Server=192.168.2.52,63765;User ID = sa; Password = Longnows2021;";
@@ -378,7 +385,7 @@ namespace CodelessModule.ViewModels
                 if (!string.IsNullOrWhiteSpace(_database))
                 {
                     DbTables = new CodeLessService(_connectString).GetDbTable(_database);
-                    SearchParams = new List<string>();
+                    SearchParams = new List<DbTableInfo>();
                 }
                 else
                 {
@@ -406,16 +413,16 @@ namespace CodelessModule.ViewModels
             else
                 DbTableInfos = new List<DbTableInfo>();
 
-            SearchParams = new List<string>();
+            SearchParams = new List<DbTableInfo>();
         }
         #endregion
 
         #region 查询字段
-        public ICommand SearchparamSelChangeCommand => new DelegateCommand<List<string>> (OnSearchparamSelChange);
+        public ICommand SearchparamSelChangeCommand => new DelegateCommand<IEnumerable<DbTableInfo>> (OnSearchparamSelChange);
 
-        private void OnSearchparamSelChange(List<string> obj)
+        private void OnSearchparamSelChange(IEnumerable<DbTableInfo> obj)
         {
-            _searchParams = obj;
+            var temp = obj;
         }
         #endregion
 
@@ -484,6 +491,131 @@ namespace CodelessModule.ViewModels
                 var path = _projectlist?.Where(x => x.projName == _project).FirstOrDefault()?.projName;
                 Rootnamespace = $"{path?.Substring(0, path.LastIndexOf("."))}.Areas.{_projectArea}";
             }
+        }
+        #endregion
+
+        #region  生成代码
+        public ICommand GenCodeCommand => new DelegateCommand<Object>(OnGenCode);
+
+        private void OnGenCode(Object obj)
+        {
+            var logading = Dialog.Show(new Loading());
+
+
+
+            if (string.IsNullOrWhiteSpace(_connectString))
+            {
+                HandyControl.Controls.MessageBox.Error("连接字符串不能为空!");
+                logading.Close();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_database))
+            {
+                HandyControl.Controls.MessageBox.Error("请选择数据库!");
+                logading.Close();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_dbTable))
+            {
+                HandyControl.Controls.MessageBox.Error("请选择数据库表!");
+                logading.Close();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_primarykey) && _projecttype == "wechat api")
+            {
+                HandyControl.Controls.MessageBox.Error("请选择业务主键!");
+                logading.Close();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_rootnamespace))
+            {
+                HandyControl.Controls.MessageBox.Error("请填写命名空间!");
+                logading.Close();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_projecttype))
+            {
+                HandyControl.Controls.MessageBox.Error("请选择项目类型!");
+                logading.Close();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_outputtype))
+            {
+                HandyControl.Controls.MessageBox.Error("请选择生成类型!");
+                logading.Close();
+                return;
+            }
+
+
+            try
+            {
+                var projname = $"{_project.Split(".").Reverse().Skip(1).Take(1).FirstOrDefault()}";
+                var tbname = $"{ FiledUtil.GetModelName(_dbTable) }";
+
+                var temp = _buildpath;
+
+                //生成代码
+                new CodeBuilder
+                (
+                    DbTableInfos,
+                    _rootnamespace,
+                    tbname.Contains(projname) ? $"{tbname}" : $"{projname}{tbname}",
+                    _database,
+                    _dbTable,
+                    _buildpath,
+                    _projecttype,
+                    _outputtype,
+                    _primarykey,
+                    _searchParams,
+                    _projectArea,
+                    $"{_buildpath.Split("Areas").FirstOrDefault()}{_xmlpath}",
+                    _viewtitle
+                )
+                .BuildModel()
+                .BuildSearchModel()
+                .BuildService()
+                .BuildController()
+                .BuildViews()
+                .BuildDbinfo();
+
+                //show result
+                if (_outputtype == "项目")
+                    HandyControl.Controls.MessageBox.Success("生成成功");
+                else
+                {
+                    var result = HandyControl.Controls.MessageBox.Show("生成成功,是否打开输出文件夹？", "温馨提示", MessageBoxButton.OKCancel, MessageBoxImage.Question, MessageBoxResult.OK);
+                    if (result == MessageBoxResult.OK)
+                    {
+                        logading.Close();
+                        Process.Start("explorer.exe", $@"{AppDomain.CurrentDomain.BaseDirectory}Oupput\");
+                    }
+                    else
+                        logading.Close();
+                }
+                logading.Close();
+            }
+            catch (Exception ex)
+            {
+                HandyControl.Controls.MessageBox.Error(ex.Message);
+                logading.Close();
+            }
+            finally
+            {
+                logading.Close();
+            }
+        }
+        #endregion
+
+        #region MessageReceived
+        private void MessageReceived(List<DbTableInfo> message)
+        {
+            _searchParams = message ?? new List<DbTableInfo>();
         }
         #endregion
     }

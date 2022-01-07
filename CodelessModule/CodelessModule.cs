@@ -18,6 +18,7 @@ namespace CodelessModule
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<AdvanceCodeless>();
+            containerRegistry.RegisterForNavigation<CodeLess>();
         }
     }
 }

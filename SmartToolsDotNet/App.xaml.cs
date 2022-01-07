@@ -40,7 +40,6 @@ namespace SmartToolsDotNet
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //ViewModelLocationProvider.Register<Header, HeaderViewModel>();
-            containerRegistry.RegisterForNavigation<CodeLessControl>();
         }
         #endregion
 

@@ -39,7 +39,7 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <Grid>
+                <Grid Background="White">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="70"></RowDefinition>
                         <RowDefinition></RowDefinition>

@@ -15,15 +15,6 @@
     <None Remove="Resources\icon\icon-white.png" />
     <None Remove="Resources\icon\icon.png" />
     <None Remove="Resources\icon\micon.ico" />
-    <None Remove="Resources\imgs\bg.png" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.controller.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.model.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.searchmodel.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.service.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.create.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.details.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.edit.tpl" />
-    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.Index.tpl" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,15 +26,6 @@
     <EmbeddedResource Include="Resources\icon\icon-white.png" />
     <EmbeddedResource Include="Resources\icon\icon.png" />
     <EmbeddedResource Include="Resources\icon\micon.ico" />
-    <EmbeddedResource Include="Resources\imgs\bg.png" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.controller.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.model.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.searchmodel.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.service.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.create.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.details.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.edit.tpl" />
-    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.Index.tpl" />
   </ItemGroup>
 
   <ItemGroup>

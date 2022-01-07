@@ -9,6 +9,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.controller.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.model.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.searchmodel.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.service.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.create.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.details.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.edit.tpl" />
+    <None Remove="Resources\Tpl\cms\SmartTools.Net.Views.Index.tpl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.controller.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.model.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.searchmodel.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.service.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.create.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.details.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.edit.tpl" />
+    <EmbeddedResource Include="Resources\Tpl\cms\SmartTools.Net.Views.Index.tpl" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.3.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />

@@ -46,7 +46,7 @@ namespace CodelessModule.ViewModels
         {
             SimpleBtnOpacity = 1;
             AdvanceBtnOpacity = 0.7M;
-            _regionManager.RequestNavigate("codelessRegion", "CodeLessControl");
+            _regionManager.RequestNavigate("codelessRegion", "CodeLess");
         }
         #endregion
 

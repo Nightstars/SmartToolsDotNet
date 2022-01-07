@@ -43,7 +43,6 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-
                     <!--第一行-->
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
@@ -102,25 +101,25 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="{DynamicResource database}" />
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource database}" />
 
                         <ComboBox
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                        SelectedValue="{Binding Database}"
-                        ItemsSource="{Binding Databaselist}"
-                        SelectedValuePath="name"
-                        DisplayMemberPath="name"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                            SelectedIndex="0"
-                        Padding="10"
-                        Margin="110,10,10,0"
-                        Name="databases"
-                    >
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            SelectedValue="{Binding Database}"
+                            ItemsSource="{Binding Databaselist}"
+                            SelectedValuePath="name"
+                            DisplayMemberPath="name"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                                SelectedIndex="0"
+                            Padding="10"
+                            Margin="110,10,10,0"
+                            Name="databases"
+                        >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding DatabaseSelChangedCommand}" CommandParameter="{Binding ElementName=databases,Path=SelectedItem}"/>
@@ -130,27 +129,27 @@
 
 
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    Width="100"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="{DynamicResource dbtable}" Grid.Column="1"/>
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            Width="100"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource dbtable}" Grid.Column="1"/>
 
                         <ComboBox
-                        Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                        SelectedValue="{Binding DbTable}"
-                        ItemsSource="{Binding DbTables}"
-                        SelectedValuePath="name"
-                        DisplayMemberPath="name"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        Margin="110,10,10,0"
-                        Padding="10"
-                        Grid.Column="1"
-                        Name="dbtables"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            SelectedValue="{Binding DbTable}"
+                            ItemsSource="{Binding DbTables}"
+                            SelectedValuePath="name"
+                            DisplayMemberPath="name"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Margin="110,10,10,0"
+                            Padding="10"
+                            Grid.Column="1"
+                            Name="dbtables"
                             SelectedIndex="0"
-                    >
+                        >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding DbSelChangeCommand}" CommandParameter="{Binding ElementName=dbtables,Path=SelectedItem}"/>
@@ -169,22 +168,22 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock
-                    Margin="16 10 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="{DynamicResource searchParam}"/>
+                            Margin="16 10 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource searchParam}"/>
 
                         <hc:CheckComboBox ItemsSource="{Binding DbTableInfos}" HorizontalAlignment="Stretch" hc:InfoElement.TitleWidth="140" Height="35"
                                   Grid.Column="1" SelectedValuePath="columnName" DisplayMemberPath="displayName"
                                   VerticalAlignment="Top" VerticalContentAlignment="Top" Name="searchparam"
-                                  Style="{StaticResource CheckComboBoxBaseStyle}" Margin="110,10,10,0">
-                            <i:Interaction.Triggers>
+                                  Style="{StaticResource CheckComboBoxBaseStyle}" Margin="110,10,10,0" ShowClearButton="True" SelectionChanged="CheckComboBox_SelectionChanged">
+                            <!--<i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding SearchparamSelChangeCommand}" CommandParameter="{Binding ElementName=searchparam,Path=SelectedValue}"/>
+                                    <i:InvokeCommandAction Command="{Binding SearchparamSelChangeCommand}" CommandParameter="{Binding ElementName=searchparam,Path=SelectedItems}"/>
                                 </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                            </i:Interaction.Triggers>-->
                         </hc:CheckComboBox>
                     </Grid>
 
@@ -199,38 +198,38 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="{DynamicResource slnfile}"/>
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource slnfile}"/>
 
                         <TextBox
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Name="slnfileaddr"
-                    VerticalAlignment="Top"
-                    Margin="110,10,10,0"
-                    Height="36"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                    VerticalScrollBarVisibility="Hidden"
-                    Padding="5"
-                    Text="{Binding Slnfileaddr}"
-                    materialDesign:HintAssist.Hint="{DynamicResource slnfileHint}"
-                    IsEnabled="False"
-                />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Name="slnfileaddr"
+                            VerticalAlignment="Top"
+                            Margin="110,10,10,0"
+                            Height="36"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Hidden"
+                            Padding="5"
+                            Text="{Binding Slnfileaddr}"
+                            materialDesign:HintAssist.Hint="{DynamicResource slnfileHint}"
+                            IsEnabled="False"
+                        />
 
                         <Button
-                    Grid.Column="1"
-                    Margin="0,10,10,0"
-                    Name="selectfile"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
-                    Content="{DynamicResource selectfile}"
+                            Grid.Column="1"
+                            Margin="0,10,10,0"
+                            Name="selectfile"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                            Content="{DynamicResource selectfile}"
                             Command="{Binding ChooseSlnCommand}"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                     </Grid>
 
@@ -262,7 +261,8 @@
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             Padding="10"
                             Margin="110,10,10,0"
-                            Name="project">
+                            Name="project"
+                            >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding ProjSelChangeCommand}" CommandParameter="{Binding ElementName=project,Path=SelectedValue}"/>
@@ -271,24 +271,24 @@
                         </ComboBox>
 
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Grid.Column="1"
-                    Text="{DynamicResource projectarea}"/>
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Grid.Column="1"
+                            Text="{DynamicResource projectarea}"/>
 
                         <ComboBox
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    SelectedValue="{Binding ProjectArea}"
-                    ItemsSource="{Binding Arealist}"
-                    SelectedIndex="0"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Padding="10"
-                    Margin="110,10,10,0"
-                    Grid.Column="1"
-                    Name="projectArea">
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            SelectedValue="{Binding ProjectArea}"
+                            ItemsSource="{Binding Arealist}"
+                            SelectedIndex="0"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Padding="10"
+                            Margin="110,10,10,0"
+                            Grid.Column="1"
+                            Name="projectArea">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding ProjAreaSelChangeCommand}" CommandParameter="{Binding ElementName=projectArea,Path=SelectedValue}"/>
@@ -309,29 +309,29 @@
 
                         <!--命名空间文本-->
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Text="{DynamicResource rootnamespace}"/>
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource rootnamespace}"/>
 
                         <!--命名空间输入框-->
                         <TextBox
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Name="rootnamespace"
-                    VerticalAlignment="Top"
-                    Margin="110,10,10,0"
-                    Height="36"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                    Text="{Binding Rootnamespace}"
-                    VerticalScrollBarVisibility="Hidden"
-                    Padding="5"
-                    materialDesign:HintAssist.Hint="{DynamicResource rootnamespacehint}"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    IsEnabled="True"
-                />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Name="rootnamespace"
+                            VerticalAlignment="Top"
+                            Margin="110,10,10,0"
+                            Height="36"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Text="{Binding Rootnamespace}"
+                            VerticalScrollBarVisibility="Hidden"
+                            Padding="5"
+                            materialDesign:HintAssist.Hint="{DynamicResource rootnamespacehint}"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            IsEnabled="True"
+                        />
                     </Grid>
 
                     <!--第七行-->
@@ -346,54 +346,53 @@
 
                         <!--视图标题-->
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Grid.Column="0"
-                    Text="{DynamicResource viewtitle}"/>
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Grid.Column="0"
+                            Text="{DynamicResource viewtitle}"/>
 
                         <!--视图标题输入框-->
                         <TextBox
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    Grid.Column="0"
-                    Name="viewtitle"
-                    VerticalAlignment="Top"
-                    Margin="110,10,10,0"
-                    Height="36"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                    Text="{Binding Viewtitle}"
-                    VerticalScrollBarVisibility="Hidden"
-                    Padding="5"
-                    materialDesign:HintAssist.Hint="{DynamicResource viewtitleHint}"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    IsEnabled="True"
-                />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Grid.Column="0"
+                            Name="viewtitle"
+                            VerticalAlignment="Top"
+                            Margin="110,10,10,0"
+                            Height="36"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Text="{Binding Viewtitle}"
+                            VerticalScrollBarVisibility="Hidden"
+                            Padding="5"
+                            materialDesign:HintAssist.Hint="{DynamicResource viewtitleHint}"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                        />
 
                         <!--项目类型文本-->
                         <TextBlock
-                    Margin="16 16 16 4"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Grid.Column="1"
-                    Text="{DynamicResource projecttype}"/>
+                            Margin="16 16 16 4"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Grid.Column="1"
+                            Text="{DynamicResource projecttype}"/>
 
                         <!--项目类型下拉框-->
                         <ComboBox
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    SelectedValue="{Binding Projecttype}"
-                    ItemsSource="{Binding Projecttypelist}"
-                    SelectedIndex="0"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Padding="10"
-                    Margin="110,10,10,0"
-                    Name="projecttype"
-                    Grid.Column="1"
-                />
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            SelectedValue="{Binding Projecttype}"
+                            ItemsSource="{Binding Projecttypelist}"
+                            SelectedIndex="0"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Padding="10"
+                            Margin="110,10,10,0"
+                            Name="projecttype"
+                            Grid.Column="1"
+                        />
 
                     </Grid>
 
@@ -409,27 +408,27 @@
 
                         <!--生成类型文本-->
                         <TextBlock
-                    Margin="16 -20 10 0"
-                    Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                    FontSize="15"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Grid.Column="0"
-                    Text="{DynamicResource Outputtype}"/>
+                            Margin="16 -20 10 0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="15"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Grid.Column="0"
+                            Text="{DynamicResource Outputtype}"/>
 
                         <!--生成类型下拉框-->
                         <ComboBox
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                    SelectedValue="{Binding Outputtype}"
-                    ItemsSource="{Binding Outputtypelist}"
-                    SelectedIndex="0"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Padding="10"
-                    Height="36"
-                    Margin="110,10,10,0"
-                    Name="outputtype"
-                    Grid.Column="0"
-                />
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                            SelectedValue="{Binding Outputtype}"
+                            ItemsSource="{Binding Outputtypelist}"
+                            SelectedIndex="0"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Padding="10"
+                            Height="36"
+                            Margin="110,10,10,0"
+                            Name="outputtype"
+                            Grid.Column="0"
+                        />
 
                     </Grid>
 
@@ -446,20 +445,20 @@
 
                         <!--生成按钮-->
                         <Button
-                    Grid.Column="1"
-                    Margin="10"
-                    Name="GenCode"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
-                    Click="GenCode_Click"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Width="180"
-                    Height="60"
-                    FontSize="30"
-                    Content="{DynamicResource generate}"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                            Grid.Column="1"
+                            Margin="10"
+                            Name="GenCode"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                            Command="{Binding GenCodeCommand}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Width="180"
+                            Height="60"
+                            FontSize="30"
+                            Content="{DynamicResource generate}"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                     </Grid>
                 </Grid>
             </Grid>
