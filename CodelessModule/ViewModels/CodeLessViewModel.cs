@@ -2,17 +2,12 @@
 using CodelessModule.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Prism.Mvvm;
 using System.Windows.Input;
 using Prism.Commands;
 using HandyControl.Controls;
-using CodelessModule.CustomControls;
 using System.Runtime.Versioning;
 using CodelessModule.Services;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows;
 using System.Linq;
 using System.IO;
@@ -20,6 +15,10 @@ using CodelessModule.Utils;
 using System.Diagnostics;
 using Prism.Events;
 using CodelessModule.Events;
+using CodeleSmartSoft.SmartUI.WPF.Controls;
+using SmartSoft.SmartUI.WPF.Events;
+using SmartSoft.SmartUI.WPF.Common.Message;
+using HandyControl.Data;
 
 namespace CodelessModule.ViewModels
 {
@@ -340,6 +339,7 @@ namespace CodelessModule.ViewModels
 
         private void OnConnect(object obj)
         {
+
             Dialog? logading = null;
 
             if (string.IsNullOrWhiteSpace(_connectString))
@@ -354,6 +354,7 @@ namespace CodelessModule.ViewModels
                 Databaselist = new CodeLessService(_connectString).GetDatabase();
 
                 Database = Databaselist.FirstOrDefault()?.name;
+                Growl.Success(new GrowlInfo { Message = "连接成功", WaitTime = 1, ShowDateTime = false });
             }
             catch (Exception ex)
             {

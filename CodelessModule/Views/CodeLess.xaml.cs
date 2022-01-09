@@ -1,30 +1,10 @@
-﻿using CodelessModule.CustomControls;
-using CodelessModule.Events;
+﻿using CodelessModule.Events;
 using CodelessModule.Models;
-using CodelessModule.Services;
-using CodelessModule.Utils;
-using CodelessModule.ViewModels;
-using HandyControl.Controls;
-using MaterialDesignThemes.Wpf;
 using Prism.Events;
-using SmartSoft.common.Utils.solution;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+using SmartSoft.SmartUI.WPF.Common;
 using System.Linq;
 using System.Runtime.Versioning;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CodelessModule.Views
 {
@@ -41,6 +21,7 @@ namespace CodelessModule.Views
         public CodeLess(IEventAggregator ea)
         {
             InitializeComponent();
+            ControlUtil.HideBoundingBox(this);
             _currentLan = "zh-cn";
             _ea = ea;
         }

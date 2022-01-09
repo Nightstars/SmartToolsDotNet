@@ -1,5 +1,6 @@
 ﻿using HandyControl.Controls;
 using Prism.Regions;
+using SmartSoft.SmartUI.WPF.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace CommonModule.Views
         public Content()
         {
             InitializeComponent();
-
+            ControlUtil.HideBoundingBox(this);
             RegionManager.SetRegionName(codelessHead, "codelessHeadRegion");
             RegionManager.SetRegionName(codeless, "codelessRegion");
         }

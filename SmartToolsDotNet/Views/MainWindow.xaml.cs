@@ -1,7 +1,5 @@
-﻿using HandyControl.Controls;
-using Prism.Regions;
-using SmartToolsDotNet.Utils;
-using System.Windows;
+﻿using Prism.Regions;
+using SmartSoft.SmartUI.WPF.Common;
 using System.Windows.Input;
 
 namespace SmartToolsDotNet.Views
@@ -19,7 +17,7 @@ namespace SmartToolsDotNet.Views
             InitializeComponent();
 
             _regionManager = regionManager;
-            new ControlUtil().HideBoundingBox(this);
+            ControlUtil.HideBoundingBox(this);
 
             RegionManager.SetRegionName(header, "headerRegion");
             RegionManager.SetRegionName(content, "contentRegion");

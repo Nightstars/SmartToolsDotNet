@@ -30,11 +30,9 @@
 
   <ItemGroup>
     <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="5.1.0" />
-    <PackageReference Include="HandyControl" Version="3.3.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
     <PackageReference Include="SmartSoft.common" Version="1.1.7947" />
+    <PackageReference Include="SmartSoft.SmartUI.WPF" Version="1.0.0" />
     <PackageReference Include="SqlSugarCore" Version="5.0.5.1" />
   </ItemGroup>
 

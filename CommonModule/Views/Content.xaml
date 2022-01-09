@@ -24,50 +24,56 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0"></RowDefinition>
+        </Grid.RowDefinitions>
         <!--<ScrollViewer>-->
-        <TabControl
+
+        <Grid Grid.Row="0">
+            <TabControl
           Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
           materialDesign:ColorZoneAssist.Mode="Standard"
           materialDesign:ShadowAssist.ShadowDepth="Depth0">
 
 
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Height="auto" Width="auto">
-                        <materialDesign:PackIcon Kind="TextBoxMultiple" Width="24" Height="24" HorizontalAlignment="Center" />
-                        <TextBlock Text="{DynamicResource commonmodule_codeless}" HorizontalAlignment="Center" />
-                    </StackPanel>
-                </TabItem.Header>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto" Width="auto">
+                            <materialDesign:PackIcon Kind="TextBoxMultiple" Width="24" Height="24" HorizontalAlignment="Center" />
+                            <TextBlock Text="{DynamicResource commonmodule_codeless}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
 
-                <Grid Background="White">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="70"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <ContentControl x:Name="codelessHead"></ContentControl>
+                        <Grid Grid.Row="0">
+                            <ContentControl x:Name="codelessHead"></ContentControl>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <ContentControl x:Name="codeless"></ContentControl>
+                        </Grid>
                     </Grid>
+                </TabItem>
 
-                    <Grid Grid.Row="1">
-                        <ContentControl x:Name="codeless"></ContentControl>
-                    </Grid>
-                </Grid>
-            </TabItem>
-
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Height="auto" Width="auto">
-                        <materialDesign:PackIcon Kind="CogBox" Width="32" Height="32" HorizontalAlignment="Center" />
-                        <TextBlock Text="{DynamicResource commonmodule_settings}" HorizontalAlignment="Center" />
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Height="auto" Width="auto">
+                            <materialDesign:PackIcon Kind="CogBox" Width="32" Height="32" HorizontalAlignment="Center" />
+                            <TextBlock Text="{DynamicResource commonmodule_settings}" HorizontalAlignment="Center" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
 
             </TabControl>
-
-
-            <!--<Grid.ColumnDefinitions>
+        </Grid>
+        <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition  Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -183,5 +189,8 @@
             <!--</Grid>-->
         <!--</Grid>-->
         <!--</ScrollViewer>-->
+        <ScrollViewer Grid.Row="1" Margin="0,-520,0,0" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right">
+            <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Bottom" Margin="0,10,10,10"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>
