@@ -34,6 +34,7 @@
     <PackageReference Include="SmartSoft.common" Version="1.1.7947" />
     <PackageReference Include="SmartSoft.SmartUI.WPF" Version="1.0.0" />
     <PackageReference Include="SqlSugarCore" Version="5.0.5.1" />
+    <PackageReference Include="XamlFlair.WPF" Version="1.2.13" />
   </ItemGroup>
 
 </Project>

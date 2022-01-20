@@ -7,6 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:SmartToolsDotNet"
         xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
         mc:Ignorable="d"
         Title="SmartToolsDotNet-Alpha"
         WindowStartupLocation="CenterScreen"
@@ -42,7 +43,9 @@
                 </Grid>
 
                 <Grid Grid.Row="1">
-                    <ContentControl x:Name="content"></ContentControl>
+                    <Border CornerRadius="10,10,10,10" xf:Animations.Primary="{xf:Animate BasedOn={StaticResource ScaleFromTop}, Delay=950}">
+                        <ContentControl x:Name="content"></ContentControl>
+                    </Border>
                 </Grid>
             </Grid>
         </Border>
