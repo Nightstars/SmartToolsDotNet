@@ -16,7 +16,7 @@ namespace CommonModule.ViewModels
     public class HeaderViewModel : BindableBase
     {
         #region initialize
-        private string _title = "SmartToolsDotnet-Alpha 1.0";
+        private string _title = "SmartToolsDotnet-Beta 1.0.2";
 
         private BitmapSource _appicon = FileUtil.GetImage("icon.icon.png");
 
