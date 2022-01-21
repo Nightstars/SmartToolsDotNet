@@ -1,5 +1,7 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Regions;
+using System.Windows.Input;
 
 namespace SmartToolsDotNet.ViewModels
 {
@@ -9,6 +11,15 @@ namespace SmartToolsDotNet.ViewModels
         public MainWindowViewModel(IRegionManager regionManager)
         {
 
+        }
+        #endregion
+
+        #region 菜单切换
+        public ICommand SwitchMenuCommand => new DelegateCommand<object>(SwitchMenu);
+
+        private void SwitchMenu(object obj)
+        {
+            var temp = obj;
         }
         #endregion
     }
