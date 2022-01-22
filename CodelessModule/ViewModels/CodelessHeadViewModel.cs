@@ -50,7 +50,7 @@ namespace CodelessModule.ViewModels
         }
         #endregion
 
-        #region OnSimpleBtnClicked
+        #region OnAdvanceBtnClicked
         public void OnAdvanceBtnClicked(Object obj)
         {
             SimpleBtnOpacity = 0.7M;

@@ -11,13 +11,16 @@ namespace CommonModule
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
+
+            regionManager.RegisterViewWithRegion("menuRegion", typeof(Menu));
             regionManager.RegisterViewWithRegion("headerRegion", typeof(Header));
             regionManager.RegisterViewWithRegion("contentRegion", typeof(Content));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<Content>();
+            containerRegistry.RegisterForNavigation<Settings>();
         }
     }
 }

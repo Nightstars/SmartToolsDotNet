@@ -32,7 +32,22 @@
         <!--<ScrollViewer>-->
 
         <Grid Grid.Row="0">
-            <TabControl
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <ContentControl x:Name="codelessHead"></ContentControl>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <ContentControl x:Name="codeless"></ContentControl>
+                </Grid>
+            </Grid>
+
+            <!--<TabControl
             Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
                 materialDesign:ColorZoneAssist.Mode="PrimaryMid"
                 materialDesign:NavigationRailAssist.SelectionCornerRadius="10 10 10 10"
@@ -48,7 +63,7 @@
                         </StackPanel>
                     </TabItem.Header>
 
-                    <Grid Background="White">
+                    <Grid Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -73,7 +88,7 @@
                     </TabItem.Header>
                 </TabItem>
 
-            </TabControl>
+            </TabControl>-->
         </Grid>
         <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition  Width="200"/>

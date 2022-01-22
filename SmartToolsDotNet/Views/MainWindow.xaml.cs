@@ -19,6 +19,7 @@ namespace SmartToolsDotNet.Views
             _regionManager = regionManager;
             ControlUtil.HideBoundingBox(this);
 
+            RegionManager.SetRegionName(menu, "menuRegion");
             RegionManager.SetRegionName(header, "headerRegion");
             RegionManager.SetRegionName(content, "contentRegion");
 
