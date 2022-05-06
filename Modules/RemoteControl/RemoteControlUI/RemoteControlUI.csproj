@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ViewModels\RemoteViewModel.cs~RF16a9421.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SmartSoft.SmartUI.WPF" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Lib\App.Common\App.Common.csproj" />
+    <ProjectReference Include="..\Rdp\RDP.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Language\en-us.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Language\zh-cn.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)$(SolutionName)\bin\Debug\net6.0-windows\Paks\&quot; /Y /S" />
+  </Target>
+
+</Project>

@@ -1,4 +1,5 @@
-﻿using SmartSoft.SmartUI.WPF.Common;
+﻿using Prism.Regions;
+using SmartSoft.SmartUI.WPF.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,14 @@ namespace CommonModule.Views
     /// </summary>
     public partial class Menu : UserControl
     {
-        public Menu()
+        private readonly IRegionManager _regionManager;
+        public Menu(IRegionManager regionManager)
         {
             InitializeComponent();
             ControlUtil.HideBoundingBox(this);
+            _regionManager = regionManager;
+
+            RegionManager.SetRegionName(user, "userRegion");
         }
     }
 }

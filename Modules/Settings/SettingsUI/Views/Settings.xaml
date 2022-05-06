@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="SettingsUI.Views.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SettingsUI.Views" xmlns:hc="https://handyorg.github.io/handycontrol" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/SettingsUI;component/Language/zh-cn.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel>
+            <TextBlock
+              Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+              Text="{DynamicResource Settings_general}" Margin="25,10,0,10" FontWeight="Bold"/>
+
+            <!--#region 打开生成目录-->
+            <Grid Margin="50,0,0,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="{DynamicResource Settings_fileDir}" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                     VerticalAlignment="Center" Text="{Binding BuildPath}"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <!--<Button Content="{DynamicResource Settings_openInExplorer}" Style="{StaticResource ButtonPrimary}" Height="40" Command="{Binding OpenFileCommand}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>-->
+                    <Button
+                                Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonAssist.CornerRadius="5"
+                                ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                                Width="100"
+                                Command="{Binding OpenFileCommand}"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="OpenInApp" />
+                            <TextBlock Text="{DynamicResource Settings_openInExplorer}" Padding="7,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+            <!--#endregion-->
+
+            <TextBlock
+              Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+              Text="{DynamicResource Settings_cache}" Margin="25,10,0,10" FontWeight="Bold"/>
+
+            <!--#region 清除缓存-->
+            <Grid Margin="50,0,0,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="{DynamicResource Settings_appcache}" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="{Binding Cachesize}" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <!--<Button Content="{DynamicResource Settings_clear}" Style="{StaticResource ButtonPrimary}" Height="40" Command="{Binding ClearCacheCommand}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>-->
+                    <Button
+                                Grid.Column="1"
+                                Width="100"
+                                Name="additem"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonAssist.CornerRadius="5"
+                                ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                                Command="{Binding ClearCacheCommand}"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="DeleteEmpty" />
+                            <TextBlock Text="{DynamicResource Settings_clear}" Padding="7,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region 清除登录信息-->
+            <Grid Margin="50,0,0,25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="{DynamicResource Settings_clearLoginCache}" VerticalAlignment="Center"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                     VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <!--<Button Content="{DynamicResource Settings_openInExplorer}" Style="{StaticResource ButtonPrimary}" Height="40" Command="{Binding OpenFileCommand}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>-->
+                    <Button
+                                Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                materialDesign:ButtonAssist.CornerRadius="5"
+                                ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                                Width="100"
+                                Command="{Binding ClearLoginCacheCommand}"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="DeleteEmpty" />
+                            <TextBlock Text="{DynamicResource Settings_clear}" Padding="7,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+            <!--#endregion-->
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

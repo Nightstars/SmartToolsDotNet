@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SmartTools/apps/e6ceff885fd78a86e9ddd8a39a2310f1/frpc.ini

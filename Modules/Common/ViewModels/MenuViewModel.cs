@@ -1,7 +1,9 @@
-﻿using CommonModule.Models;
-using Prism.Commands;
+﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using SmartSoft.SmartUI.WPF.Common.Menu;
+using SmartSoft.SmartUI.WPF.Events;
 using SmartToolsDotNet.Utils;
 using System;
 using System.Collections.Generic;
@@ -25,14 +27,22 @@ namespace CommonModule.ViewModels
 
         private IRegionManager _regionManager;
 
-        public MenuViewModel(IRegionManager regionManager)
+        private IEventAggregator _ea;
+
+        public MenuViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             _regionManager = regionManager;
-            _menuItems = new List<MenuItem>
-            {
-                new MenuItem{ icon = "TextBoxMultiple", title = "CodeLess", ViewName = "Content"},
-                new MenuItem{ icon = "CogBox", title = "设置", ViewName = "Settings"},
-            };
+
+            _ea = ea;
+
+            _ea.GetEvent<MenuEvent>().Subscribe(LoadMenu);
+
+            //_menuItems = new List<MenuItem>
+            //{
+            //    new MenuItem{ icon = "TextBoxMultiple", title = "CodeLess", ViewName = "Content"},
+            //    new MenuItem{ icon = "TextBoxMultiple", title = "demo", ViewName = "DemoPage"},
+            //    new MenuItem{ icon = "CogBox", title = "设置", ViewName = "Settings"},
+            //};
         }
         #endregion
 
@@ -50,7 +60,30 @@ namespace CommonModule.ViewModels
 
         private void SwitchMenu(MenuItem item)
         {
+            switch (item.type)
+            {
+                case MenuType.Menu:
+                    _regionManager.RequestNavigate("contentRegion", item.ViewName);
+                    break;
+                case MenuType.Url:
+                    System.Diagnostics.Process.Start("explorer.exe", item.ViewName);
+                    break;
+                default:
+                    break;
+            }
             _regionManager.RequestNavigate("contentRegion", item.ViewName);
+        }
+        #endregion
+
+        #region 加载菜单
+        private void LoadMenu(MenuItem menuItem)
+        {
+            var menus = new List<MenuItem>();
+            if(_menuItems?.Count > 0)
+                menus.AddRange(_menuItems);
+            menus.Add(menuItem);
+            MenuItems = menus.OrderByDescending(x => x.Weight).ToList();
+
         }
         #endregion
     }

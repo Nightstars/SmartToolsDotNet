@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Images\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <None Remove="Images\**" />
+    <Page Remove="Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\icon\appicon.png" />
+    <None Remove="Resources\icon\icon.png" />
+    <None Remove="Resources\imgs\2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\imgs\2.png" />
+    <EmbeddedResource Include="Resources\icon\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SmartSoft.SmartUI.WPF" Version="1.0.3" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)$(SolutionName)\bin\Debug\net6.0-windows\Paks\&quot; /Y /S" />
+  </Target>
+
+</Project>

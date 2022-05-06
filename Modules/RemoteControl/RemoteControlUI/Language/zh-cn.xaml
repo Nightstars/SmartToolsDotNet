@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="remotecontrolui_thisdevice">此设备</system:String>
+    <system:String x:Key="remotecontrolui_devicecode">设备代码</system:String>
+    <system:String x:Key="remotecontrolui_tempsecret">临时密码</system:String>
+    <system:String x:Key="remotecontrolui_remotedevice">远程控制设备</system:String>
+    <system:String x:Key="remotecontrolui_connect">连接</system:String>
+    <system:String x:Key="remotecontrolui_remotecode">请输入远程设备代码</system:String>
+    <system:String x:Key="remotecontrolui_readytoconnect">已连接安全加密服务器(端到端安全加密已启用)</system:String>
+</ResourceDictionary>

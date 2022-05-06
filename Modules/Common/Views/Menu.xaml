@@ -33,21 +33,21 @@
         </Border>-->
 
         <Grid>
-            <StackPanel Orientation="Vertical" Margin="10,10,10,10">
-                <TextBlock HorizontalAlignment="Left" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">SmartToolsDotnet</TextBlock>
-                <Ellipse Cursor="Hand"
-                             HorizontalAlignment="Center"
-                                     Margin="0,25,0,0"
-                             Width="100"
-                             Height="100">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding AppIcon}"></ImageBrush>
-                    </Ellipse.Fill>
-                </Ellipse>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
 
-                <TextBlock Margin="0,20,0,0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" HorizontalAlignment="Center">登录</TextBlock>
+            <Grid>
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}"  VerticalAlignment="Top" Margin="0,10,0,0">SmartTools</TextBlock>
+            </Grid>
 
-            </StackPanel>
+            <Grid Grid.Row="1">
+                <ContentControl x:Name="user"></ContentControl>
+            </Grid>
+
         </Grid>
 
         <Grid Grid.Row="1">
@@ -106,7 +106,7 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}">Beta 1.0.2</TextBlock>
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" Text="{DynamicResource app_version}"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

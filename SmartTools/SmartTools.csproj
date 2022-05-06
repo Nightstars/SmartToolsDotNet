@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\icon\appicon.ico</ApplicationIcon>
+    <BaseOutputPath></BaseOutputPath>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\icon\boot.png" />
+    <None Remove="Resources\icon\icon-white.png" />
+    <None Remove="Resources\icon\icon.png" />
+    <None Remove="Resources\icon\micon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icon\appicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\icon\icon-white.png" />
+    <EmbeddedResource Include="Resources\icon\icon.png" />
+    <EmbeddedResource Include="Resources\icon\micon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" Version="5.1.0" />
+    <PackageReference Include="Flurl" Version="3.0.4" />
+    <PackageReference Include="Flurl.Http" Version="3.2.2" />
+    <PackageReference Include="IdentityModel.OidcClient" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1150.38" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SmartSoft.common" Version="1.1.7947" />
+    <PackageReference Include="SmartSoft.SmartUI.WPF" Version="1.0.3" />
+    <PackageReference Include="SqlSugarCore" Version="5.0.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\icon\boot.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="apps\e6ceff885fd78a86e9ddd8a39a2310f1\frpc.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="apps\e6ceff885fd78a86e9ddd8a39a2310f1\frpc.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="app_data\cache.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="apps\e6ceff885fd78a86e9ddd8a39a2310f1\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="Settings_cache">缓存</system:String>
+    <system:String x:Key="Settings_appcache">应用缓存</system:String>
+    <system:String x:Key="Settings_general">通用</system:String>
+    <system:String x:Key="Settings_size">大小</system:String>
+    <system:String x:Key="Settings_clear">清理</system:String>
+    <system:String x:Key="Settings_fileDir">生成文件目录</system:String>
+    <system:String x:Key="Settings_openInExplorer">打开</system:String>
+    <system:String x:Key="Settings_clearLoginCache">登录缓存</system:String>
+</ResourceDictionary>
