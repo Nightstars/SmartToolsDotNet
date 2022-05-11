@@ -1,4 +1,10 @@
-﻿using Prism.Commands;
+﻿using App.Common.Enums;
+using App.Common.Events;
+using App.Common.Models.events;
+using HandyControl.Controls;
+using HandyControl.Data;
+using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -6,7 +12,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace NetAnywhereUI.ViewModels
 {
@@ -21,12 +29,14 @@ namespace NetAnywhereUI.ViewModels
         public event DelReadStdOutput ReadStdOutput;
         public event DelReadErrOutput ReadErrOutput;
 
-        public NetAnywhereViewModel()
+        private IEventAggregator _ea;
+
+        public NetAnywhereViewModel(IEventAggregator ea)
         {
             Init();
+            _ea = ea;
         }
         #endregion
-
 
         #region init
         private void Init()
@@ -48,12 +58,34 @@ namespace NetAnywhereUI.ViewModels
         #endregion
 
         #region 连接文本
-        private string _connectText = "连接";
+        private string _connectText = "未连接";
         public string ConnectText
         {
             get { return _connectText; }
             set { SetProperty(ref _connectText, value); }
         }
+        #endregion
+
+        #region 连接文本
+        private string _connectTime = "00:00:00";
+        public string ConnectTime
+        {
+            get { return _connectTime; }
+            set { SetProperty(ref _connectTime, value); }
+        }
+        #endregion
+
+        #region 按钮颜色
+        private string _btnColor = "#db3340";
+        public string BtnColor
+        {
+            get { return _btnColor; }
+            set { SetProperty(ref _btnColor, value); }
+        }
+        #endregion
+
+        #region 初始时间
+        private DateTime startime = DateTime.MinValue;
         #endregion
 
         #region
@@ -97,7 +129,6 @@ namespace NetAnywhereUI.ViewModels
             if (e.Data != null)
             {
                 // 4. 异步调用，需要invoke
-                //this.Invoke(ReadStdOutput, new object[] { e.Data });
                 ReadStdOutput(e.Data);
             }
         }
@@ -109,7 +140,7 @@ namespace NetAnywhereUI.ViewModels
         {
             if (e.Data != null)
             {
-                //this.Invoke(ReadErrOutput, new object[] { e.Data });
+                Growl.Error(new GrowlInfo { Message = e.Data, ShowDateTime = false });
             }
         }
 
@@ -122,7 +153,7 @@ namespace NetAnywhereUI.ViewModels
             if(result.Contains("login to server success"))
             {
                 IsConnected = true;
-                ConnectText = "断开";
+                ConnectText = "已连接";
             }
             else if(result.Contains("login to server failed"))
             {
@@ -134,7 +165,13 @@ namespace NetAnywhereUI.ViewModels
                 IsConnected= false;
                 ConnectText = "连接中...";
             }
-            Logs += $"{result}\r\n";
+            if (Logs == null)
+                Logs += $"{result}\r\n";
+            else
+                Logs = Logs.Insert(0, $"{result}\r\n");
+            //Application.Current.Dispatcher.Invoke(() => {
+            //    _ea.GetEvent<CommonEvent>().Publish(new CommoneventInfo<Object> { msgtype = MsgType.loadlog });
+            //});
         }
 
         #endregion
@@ -142,7 +179,7 @@ namespace NetAnywhereUI.ViewModels
         #region ReadErrOutputAction
         private void ReadErrOutputAction(string result)
         {
-            //this.textBoxShowErrRet.AppendText(result + "\r\n");
+            Growl.Error(new GrowlInfo { Message = result, ShowDateTime = false });
         }
 
         #endregion
@@ -159,19 +196,37 @@ namespace NetAnywhereUI.ViewModels
 
         private void OnConnect(object obj)
         {
+            //DispatcherTimer timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromSeconds(1);
+            //timer.Tick += timer_Tick;
             // 启动进程执行相应命令,此例中以执行ping.exe为例
-            if(!IsConnected)
+            if (!IsConnected)
             {
                 Process.GetProcessesByName("frpc").ToList().ForEach(x => x.Kill());
+                BtnColor = "#008000";
                 RealAction("./apps/e6ceff885fd78a86e9ddd8a39a2310f1/frpc.exe", "-c ./apps/e6ceff885fd78a86e9ddd8a39a2310f1/frpc.ini");
+
+                //timer.Start();
             }
             else
             {
                 Process.GetProcessesByName("frpc").ToList().ForEach(x => x.Kill());
                 IsConnected = false;
-                ConnectText = "连接";
+                ConnectText = "未连接";
+                BtnColor = "#db3340";
+                //timer.Stop();
+                startime = DateTime.MinValue;
+                ConnectTime = DateTime.MinValue.ToString("HH:mm:ss");
             }
 
+        }
+        #endregion
+
+        #region MyRegion
+        void timer_Tick(object sender, EventArgs e)
+        {
+            startime = startime.AddSeconds(1);
+           ConnectTime = startime.ToString("HH:mm:ss");
         }
         #endregion
     }

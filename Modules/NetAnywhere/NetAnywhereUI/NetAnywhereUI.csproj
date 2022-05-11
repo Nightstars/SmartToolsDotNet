@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Lib\App.Common\App.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="Language\en-us.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

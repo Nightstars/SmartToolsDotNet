@@ -13,6 +13,7 @@ namespace App.Common.Enums
         changeSite,//切换工厂
         clearLoginCache,//清除登录信息
         loginExpired,//登录过期
-        rdp,化远程控制事件
+        rdp,//远程控制事件
+        loadlog,//加载日志
     }
 }
