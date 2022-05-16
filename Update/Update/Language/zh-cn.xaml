@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="userui_server_version">切换CMS版本</system:String>
+    <system:String x:Key="userui_login">登录</system:String>
+    <system:String x:Key="userui_factory">切换工厂</system:String>
+    <system:String x:Key="userui_loginout">注销</system:String>
+</ResourceDictionary>
