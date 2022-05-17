@@ -7,6 +7,7 @@ using SmartSoft.SmartUI.WPF.Events;
 using SmartToolsDotNet.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,14 @@ namespace CommonModule.ViewModels
             //    new MenuItem{ icon = "TextBoxMultiple", title = "demo", ViewName = "DemoPage"},
             //    new MenuItem{ icon = "CogBox", title = "设置", ViewName = "Settings"},
             //};
+        }
+        #endregion
+
+        #region 版本号
+        private string _appVersion = $"Beta {FileVersionInfo.GetVersionInfo(@"./SmartTools.exe")?.FileVersion ?? "1.0.0.0"}";
+        public string AppVersion {
+            get { return _appVersion; }
+            set { SetProperty(ref _appVersion, value); }
         }
         #endregion
 

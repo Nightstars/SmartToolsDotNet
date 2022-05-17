@@ -5,12 +5,23 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <BaseOutputPath>F:\myproject\vs\SmartToolsDotNet\SmartTools\bin</BaseOutputPath>
+    <ApplicationIcon>Resources\icon\icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icon\icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="GeneralUpdate.Core" Version="4.10.13" />
     <PackageReference Include="SmartSoft.SmartUI.WPF" Version="1.0.3" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
 
   <ItemGroup>
     <Page Update="Language\en-us.xaml">

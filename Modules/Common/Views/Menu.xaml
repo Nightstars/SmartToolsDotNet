@@ -106,7 +106,7 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" Text="{DynamicResource app_version}"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle2TextBlock}" Text="{Binding AppVersion}"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>
