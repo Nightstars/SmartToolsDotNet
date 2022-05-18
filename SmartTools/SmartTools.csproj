@@ -52,10 +52,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SplashScreen Include="Resources\icon\boot.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="apps\e6ceff885fd78a86e9ddd8a39a2310f1\frpc.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -69,6 +65,10 @@
 
   <ItemGroup>
     <Folder Include="apps\e6ceff885fd78a86e9ddd8a39a2310f1\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\icon\boot.png" />
   </ItemGroup>
 
 </Project>

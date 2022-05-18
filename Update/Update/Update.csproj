@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <BaseOutputPath>F:\myproject\vs\SmartToolsDotNet\SmartTools\bin</BaseOutputPath>
+    <BaseOutputPath>../../SmartTools/bin</BaseOutputPath>
     <ApplicationIcon>Resources\icon\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
