@@ -21,7 +21,7 @@ namespace SmartToolsDotNet.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         #region initialize
-        private const string baseUrl = @"http://127.0.0.1:5000", hubName = "versionhub";
+        private const string baseUrl = @"http://127.0.0.1:5004/api/AppInfo", hubName = "versionhub";
         private ClientParameter clientParameter;
         public MainWindowViewModel(IRegionManager regionManager)
         {
