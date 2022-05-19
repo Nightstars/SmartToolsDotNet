@@ -38,7 +38,7 @@ namespace NetAnywhereUI.Views
         #region OnLoadLog
         private void OnLoadLog(object obj)
         {
-            this.logs.ScrollToEnd();
+            //this.logs.ScrollToEnd();
         }
         #endregion
     }

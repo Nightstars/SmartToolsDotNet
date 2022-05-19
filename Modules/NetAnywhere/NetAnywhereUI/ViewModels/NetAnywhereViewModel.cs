@@ -6,6 +6,7 @@ using HandyControl.Data;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -30,11 +31,15 @@ namespace NetAnywhereUI.ViewModels
         public event DelReadErrOutput ReadErrOutput;
 
         private IEventAggregator _ea;
+        private readonly IRegionManager _regionManager;
 
-        public NetAnywhereViewModel(IEventAggregator ea)
+        public NetAnywhereViewModel(IEventAggregator ea, IRegionManager regionManager)
         {
             Init();
             _ea = ea;
+            _regionManager = regionManager;
+            _showState = "Visibility";
+            _showLogs = "Collapsed";
         }
         #endregion
 
@@ -48,7 +53,7 @@ namespace NetAnywhereUI.ViewModels
 
         #endregion
 
-        #region 控制台内容
+        #region 日志内容
         private string _logs;
         public string Logs
         {
@@ -88,9 +93,27 @@ namespace NetAnywhereUI.ViewModels
         private DateTime startime = DateTime.MinValue;
         #endregion
 
-        #region
+        #region 连接状态
         //连接状态
         private bool IsConnected;
+        #endregion
+
+        #region 展示连接信息
+        private string _showState;
+        public string ShowState
+        {
+            get { return _showState; }
+            set { SetProperty(ref _showState, value); }
+        }
+        #endregion
+
+        #region 显示日志
+        private string _showLogs;
+        public string ShowLogs
+        {
+            get { return _showLogs; }
+            set { SetProperty(ref _showLogs, value); }
+        }
         #endregion
 
         #region RealAction
@@ -154,11 +177,13 @@ namespace NetAnywhereUI.ViewModels
             {
                 IsConnected = true;
                 ConnectText = "已连接";
+                Growl.Success(new GrowlInfo { Message = "连接成功", ShowDateTime = false, WaitTime = 1 });
             }
             else if(result.Contains("login to server failed"))
             {
                 IsConnected = false;
                 ConnectText = "连接中...";
+                Growl.Error(new GrowlInfo { Message = "连接失败", ShowDateTime = false });
             }
             else if (result.Contains("try to reconnect to server..."))
             {
@@ -169,9 +194,8 @@ namespace NetAnywhereUI.ViewModels
                 Logs += $"{result}\r\n";
             else
                 Logs = Logs.Insert(0, $"{result}\r\n");
-            //Application.Current.Dispatcher.Invoke(() => {
-            //    _ea.GetEvent<CommonEvent>().Publish(new CommoneventInfo<Object> { msgtype = MsgType.loadlog });
-            //});
+
+            //_ea.GetEvent<CommonEvent>().Publish(new CommoneventInfo<object> { msgtype = MsgType.logs, data = result });
         }
 
         #endregion
@@ -205,7 +229,6 @@ namespace NetAnywhereUI.ViewModels
                 Process.GetProcessesByName("frpc").ToList().ForEach(x => x.Kill());
                 BtnColor = "#008000";
                 RealAction("./apps/e6ceff885fd78a86e9ddd8a39a2310f1/frpc.exe", "-c ./apps/e6ceff885fd78a86e9ddd8a39a2310f1/frpc.ini");
-
                 //timer.Start();
             }
             else
@@ -213,6 +236,7 @@ namespace NetAnywhereUI.ViewModels
                 Process.GetProcessesByName("frpc").ToList().ForEach(x => x.Kill());
                 IsConnected = false;
                 ConnectText = "未连接";
+                Growl.Warning(new GrowlInfo { Message = "断开连接", ShowDateTime = false, WaitTime = 1 });
                 BtnColor = "#db3340";
                 //timer.Stop();
                 startime = DateTime.MinValue;
@@ -222,7 +246,38 @@ namespace NetAnywhereUI.ViewModels
         }
         #endregion
 
-        #region MyRegion
+        #region 显示日志
+        public ICommand ShowLogsCommand { get => new DelegateCommand<object>(OnShowLogs); }
+
+        private void OnShowLogs(object obj)
+        {
+            //_regionManager.RequestNavigate("contentRegion", "Logs");
+            ShowState = "Collapsed";
+            ShowLogs = "Visibility";
+        }
+        #endregion
+
+        #region 隐藏日志
+        public ICommand HideLogsCommand => new DelegateCommand<object>(OnHideLogs);
+
+        private void OnHideLogs(Object obj)
+        {
+            ShowState = "Visibility";
+            ShowLogs = "Collapsed";
+        }
+        #endregion
+
+        #region 配置
+        public ICommand ConfigCommand => new DelegateCommand<object>(OnConfig);
+
+        private void OnConfig(Object obj)
+        {
+            //_regionManager.RequestNavigate("contentRegion", "ConfigFrp");
+            Process.Start("explorer.exe", @".\apps\e6ceff885fd78a86e9ddd8a39a2310f1\frpc.ini");
+        }
+        #endregion
+
+        #region 计时器
         void timer_Tick(object sender, EventArgs e)
         {
             startime = startime.AddSeconds(1);

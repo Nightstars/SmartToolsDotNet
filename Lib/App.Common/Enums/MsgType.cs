@@ -15,6 +15,7 @@ namespace App.Common.Enums
         loginExpired,//登录过期
         rdp,//远程控制事件
         loadlog,//加载日志
-        update, 更新事件
+        update, //更新事件
+        logs, //日志事件
     }
 }

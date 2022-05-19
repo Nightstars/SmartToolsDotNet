@@ -18,7 +18,7 @@
     <Grid>
         <StackPanel>
             <TextBlock
-              Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+              Style="{StaticResource MaterialDesignHeadline6TextBlock}"
               Text="{DynamicResource Settings_general}" Margin="25,10,0,10" FontWeight="Bold"/>
 
             <!--#region 打开生成目录-->
@@ -59,7 +59,7 @@
             <!--#endregion-->
 
             <TextBlock
-              Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+              Style="{StaticResource MaterialDesignHeadline6TextBlock}"
               Text="{DynamicResource Settings_cache}" Margin="25,10,0,10" FontWeight="Bold"/>
 
             <!--#region 清除缓存-->

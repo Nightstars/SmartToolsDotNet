@@ -25,7 +25,7 @@ namespace SmartToolsDotNet.ViewModels
         private ClientParameter clientParameter;
         public MainWindowViewModel(IRegionManager regionManager)
         {
-            CheckUpdate();
+            //CheckUpdate();
             //InitVersionHub();
         }
         #endregion
