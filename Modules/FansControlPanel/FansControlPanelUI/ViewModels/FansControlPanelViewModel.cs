@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace FansControlPanelUI.ViewModels
@@ -15,19 +16,40 @@ namespace FansControlPanelUI.ViewModels
     internal class FansControlPanelViewModel : BindableBase
     {
         #region init
-        private static string ipmitoolPath = "./apps/25dd149cfd8c7533b86c958b16b7025d/ipmitool.exe";
+        private static string current = AppDomain.CurrentDomain.BaseDirectory;
+        private string ipmitoolPath = $"{current}apps\\25dd149cfd8c7533b86c958b16b7025d\\ipmitool.exe";
+        // 1.定义委托
+        public delegate void DelReadStdOutput(string result);
+        public delegate void DelReadErrOutput(string result);
+
+        // 2.定义委托事件
+        public event DelReadStdOutput ReadStdOutput;
+        public event DelReadErrOutput ReadErrOutput;
+
+        public FansControlPanelViewModel()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            //3.将相应函数注册到委托事件中
+            ReadStdOutput += new DelReadStdOutput(ReadStdOutputAction);
+            ReadErrOutput += new DelReadErrOutput(ReadErrOutputAction);
+        }
         #endregion
 
         #region ip
-        private String _ip = "111";
-        public String Ip {
+        private String _ip = "192.168.1.150";
+        public String Ip
+        {
             get { return _ip; }
             set { SetProperty(ref _ip, value); }
         }
         #endregion
 
         #region user
-        private String _user = "222";
+        private String _user = "root";
         public String User
         {
             get { return _user; }
@@ -36,7 +58,7 @@ namespace FansControlPanelUI.ViewModels
         #endregion
 
         #region password
-        private String _pwd = "333";
+        private String _pwd = "Sj.shangjian1998";
         public String Pwd
         {
             get { return _pwd; }
@@ -58,18 +80,17 @@ namespace FansControlPanelUI.ViewModels
 
         private void SetFanSpeed(object obj)
         {
-            string fullExecuteDisableAutoMode = $"{ipmitoolPath} -I lanplus -H {_ip} -U {_user} -P {_pwd} raw 0x30 0x30 0x01 0x00";
+            string fullExecuteDisableAutoMode = $"-I lanplus -H {_ip} -U {_user} -P {_pwd} raw 0x30 0x30 0x01 0x00";
 
-            string resultDisableAutoMode = execute(fullExecuteDisableAutoMode);
+            RealAction(ipmitoolPath, fullExecuteDisableAutoMode);
 
-            string formatSetSpeed = $"{ipmitoolPath} -I lanplus -H {_ip} -U {_user} -P {_pwd} raw 0x30 0x30 0x02 0xff 0x{3:x2}";
+            string formatSetSpeed = "-I lanplus -H {0} -U {1} -P {2} raw 0x30 0x30 0x02 0xff 0x{3:x2}";
 
-            string fullExecuteSetSpeed = string.Format(formatSetSpeed, _speed);
+            string fullExecuteSetSpeed = string.Format(formatSetSpeed, _ip, _user, _pwd, _speed);
 
-            string resultSetSpeed = execute(fullExecuteSetSpeed);
+            RealAction(ipmitoolPath, fullExecuteSetSpeed);
 
-            if(resultSetSpeed != null)
-                Growl.Success(new GrowlInfo { Message = "操作成功", ShowDateTime = false, WaitTime = 1 });
+            Growl.Success(new GrowlInfo { Message = "操作成功", ShowDateTime = false, WaitTime = 1 });
         }
         #endregion
 
@@ -82,44 +103,85 @@ namespace FansControlPanelUI.ViewModels
 
             string parametersReset = $"-I lanplus -H {_ip} -U {_user} -P {_pwd} raw 0x30 0x30 0x01 0x01";
 
-            string fullExecuteReset = $"{ipmitoolPath} {parametersReset}";
+            RealAction(ipmitoolPath, parametersReset);
 
-            string resultResetSpeed = execute(fullExecuteReset);
-
-            if (resultResetSpeed != null)
-                Growl.Success(new GrowlInfo { Message = "重置完成", ShowDateTime = false, WaitTime = 1 });
+            Growl.Success(new GrowlInfo { Message = "重置完成", ShowDateTime = false, WaitTime = 1 });
         }
         #endregion
 
-        #region 执行
-        private string execute(string parameter)
+        #region RealAction
+        private void RealAction(string StartFileName, string StartFileArg)
         {
-            Process process = null;
-            string result = string.Empty;
-            try
+            Process CmdProcess = new Process();
+            CmdProcess.StartInfo.FileName = StartFileName;      // 命令
+            CmdProcess.StartInfo.Arguments = StartFileArg;      // 参数
+
+            CmdProcess.StartInfo.CreateNoWindow = true;         // 不创建新窗口
+            CmdProcess.StartInfo.UseShellExecute = false;
+            CmdProcess.StartInfo.RedirectStandardInput = true;  // 重定向输入
+            CmdProcess.StartInfo.RedirectStandardOutput = true; // 重定向标准输出
+            CmdProcess.StartInfo.RedirectStandardError = true;  // 重定向错误输出
+                                                                //CmdProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            CmdProcess.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
+            CmdProcess.ErrorDataReceived += new DataReceivedEventHandler(p_ErrorDataReceived);
+
+            CmdProcess.EnableRaisingEvents = true;                      // 启用Exited事件
+            CmdProcess.Exited += new EventHandler(CmdProcess_Exited);   // 注册进程结束事件
+
+            CmdProcess.Start();
+            CmdProcess.BeginOutputReadLine();
+            CmdProcess.BeginErrorReadLine();
+
+            // 如果打开注释，则以同步方式执行命令，此例子中用Exited事件异步执行。
+            // CmdProcess.WaitForExit();
+        }
+        #endregion
+
+        #region p_OutputDataReceived
+        private void p_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
             {
-                process = new Process();
-
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.RedirectStandardInput = true;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
-
-                process.Start();
-
-                process.StandardInput.WriteLine(parameter + "& exit");
-                process.StandardInput.AutoFlush = true;
-                result = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-                process.Close();
-                return result;
+                // 4. 异步调用，需要invoke
+                ReadStdOutput(e.Data);
             }
-            catch (Exception ex)
+        }
+
+        #endregion
+
+        #region p_ErrorDataReceived
+        private void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
             {
-                Growl.Error(new GrowlInfo { Message = $"啊哦，失败了ExceptionOccurred:{ex.Message},{ex.StackTrace.ToString()}", ShowDateTime = false, WaitTime = 5 });
-                return null;
+                Growl.Error(new GrowlInfo { Message = e.Data, ShowDateTime = false });
             }
+        }
+
+        #endregion
+
+        #region ReadStdOutputAction
+        private void ReadStdOutputAction(string result)
+        {
+            //this.textBoxShowStdRet.AppendText(result + "\r\n");
+            //_ea.GetEvent<CommonEvent>().Publish(new CommoneventInfo<object> { msgtype = MsgType.logs, data = result });
+        }
+
+        #endregion
+
+        #region ReadErrOutputAction
+        private void ReadErrOutputAction(string result)
+        {
+            Growl.Error(new GrowlInfo { Message = result, ShowDateTime = false });
+        }
+
+        #endregion
+
+        #region CmdProcess_Exited
+        private void CmdProcess_Exited(object sender, EventArgs e)
+        {
+            // 执行结束后触发
         }
         #endregion
     }
