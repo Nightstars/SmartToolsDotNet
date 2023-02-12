@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="fanccontrolpanel_host">主机</system:String>
+    <system:String x:Key="fanccontrolpanel_host_hint">填写主机地址</system:String>
+    <system:String x:Key="fanccontrolpanel_user">用户名</system:String>
+    <system:String x:Key="fanccontrolpanel_user_hint">填写用户名</system:String>
+    <system:String x:Key="fanccontrolpanel_pwd">密码</system:String>
+    <system:String x:Key="fanccontrolpanel_pwd_hint">填写密码</system:String>
+    <system:String x:Key="fanccontrolpanel_speed">风速</system:String>
+    <system:String x:Key="fanccontrolpanel_confirm">确定</system:String>
+    <system:String x:Key="fanccontrolpanel_reset">重置</system:String>
+</ResourceDictionary>

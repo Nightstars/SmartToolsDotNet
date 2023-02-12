@@ -7,6 +7,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using SmartSoft.common.Utils.update;
+using SmartTools.Views;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -21,7 +22,9 @@ namespace SmartToolsDotNet.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         #region initialize
+        private Update _update = new();
         private const string baseUrl = @"http://127.0.0.1:5004/api/AppInfo", hubName = "versionhub";
+        //private const string baseUrl = @"http://api.smartcloud.fun:3/api/AppInfo", hubName = "versionhub";
         private ClientParameter clientParameter;
         public MainWindowViewModel(IRegionManager regionManager)
         {
@@ -64,7 +67,8 @@ namespace SmartToolsDotNet.ViewModels
 
                 #region update app.
                 //更新组件的版本号
-                clientParameter.ClientVersion = FileVersionInfo.GetVersionInfo(@"./Update.exe").FileVersion;
+                //clientParameter.ClientVersion = FileVersionInfo.GetVersionInfo(@"./Update.exe").FileVersion;
+                clientParameter.ClientVersion = "1.2";
                 //客户端类型：1.主程序客户端 2.更新组件
                 clientParameter.AppType = (int)AppType.UpdateApp;
                 //更新组件请求验证更新的服务端地址
@@ -108,6 +112,7 @@ namespace SmartToolsDotNet.ViewModels
                 //注入一个func让用户决定是否跳过本次更新，如果是强制更新则不生效
                 SetCustomOption(ConfirmUpdate).
                 Strategy<ClientStrategy>();
+                StartLoading();
                 await generalClientBootstrap.LaunchTaskAsync();
             });
         }
@@ -179,6 +184,7 @@ namespace SmartToolsDotNet.ViewModels
         {
             //e.FailedVersions; 如果出现下载失败则会把下载错误的版本、错误原因统计到该集合当中。
             Debug.WriteLine($"Is all download completed {e.IsAllDownloadCompleted}.");
+            StopLoading();
         }
         #endregion
 
@@ -203,6 +209,31 @@ namespace SmartToolsDotNet.ViewModels
         private void OnMutiDownloadError(object sender, MutiDownloadErrorEventArgs e)
         {
             //Debug.WriteLine($"{ e.Version.Name } error!");
+        }
+        #endregion
+
+        #region 显示更新弹层
+        private void StartLoading()
+        {
+            //_update.Owner = Application.Current.MainWindow;//设置弹出层在主窗体上方
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                //_update.Owner = ;
+                _update.Topmost = true;
+                _update.Show();//打开弹出层
+            });
+            //IsEnabled = false;//设置主窗体不可用
+        }
+        #endregion
+
+        #region 关闭更新弹层
+        private void StopLoading()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _update.Hide();//弹出层隐藏（如果直接Close的话，只能打开弹出层一次）
+            });
+            //IsEnabled = true;//主窗体可用
         }
         #endregion
     }

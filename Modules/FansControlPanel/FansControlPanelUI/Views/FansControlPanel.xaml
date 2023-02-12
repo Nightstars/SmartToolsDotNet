@@ -1,0 +1,207 @@
+﻿<UserControl x:Class="FansControlPanelUI.Views.FansControlPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FansControlPanelUI.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <!--#region 加载资源-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/FansControlPanelUI;component/Language/zh-cn.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--#endregion-->
+
+    <StackPanel>
+        <Grid Margin="0, 15, 25, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                            Margin="0,0,15,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="21"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource fanccontrolpanel_host}" />
+
+                <TextBox Grid.Column="1"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Name="connectString"
+                            VerticalAlignment="Top"
+                            Height="36"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Text="{Binding Ip}"
+                            VerticalScrollBarVisibility="Hidden"
+                            Padding="5"
+                            materialDesign:HintAssist.Hint="{DynamicResource fanccontrolpanel_host_hint}"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            IsEnabled="True"
+                        />
+
+
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="0, 15, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Margin="0, 0, 10, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                            Margin="0,0,15,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="21"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource fanccontrolpanel_user}" />
+
+                    <TextBox Grid.Column="1"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            Height="36"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Text="{Binding User}"
+                            VerticalScrollBarVisibility="Hidden"
+                            Padding="5"
+                            materialDesign:HintAssist.Hint="{DynamicResource fanccontrolpanel_user_hint}"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            IsEnabled="True"
+                        />
+
+                </Grid>
+
+                <Grid Margin="10, 0, 0, 0" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                            Margin="0,0,15,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="21"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource fanccontrolpanel_pwd}" />
+
+                    <TextBox Grid.Column="1"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            VerticalAlignment="Top"
+                            Text="{Binding Pwd}"
+                            Height="36"
+                            Padding="5"
+                            materialDesign:HintAssist.Hint="{DynamicResource fanccontrolpanel_pwd_hint}"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            IsEnabled="True"
+                        />
+
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0, 15, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                            Margin="0,0,15,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="21"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Text="{DynamicResource fanccontrolpanel_speed}" />
+
+                <Slider Grid.Column="1"
+                        Name="fanSpeed"
+                  Value="{Binding Speed}"
+                  Minimum="10"
+                  Maximum="100"
+                        IsSnapToTickEnabled="True"
+                        />
+
+                <TextBlock Grid.Column="2"
+                            Margin="0,0,0,0"
+                            Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                            FontSize="21"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="{Binding ElementName=fanSpeed, Path=Value}" />
+
+
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0, 25, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button
+                            Grid.Column="0"
+                            Margin="0, 0, 40, 0"
+                            Name="GenCode"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                            Command="{Binding SetCommand}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Width="150"
+                            Height="40"
+                            FontSize="24"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="VideoInputAntenna" Height="30" Width="30" FontSize="30"/>
+                        <TextBlock Text="{DynamicResource fanccontrolpanel_confirm}" Padding="10,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+                <Button
+                            Grid.Column="1"
+                            Margin="40, 0, 0, 0"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            materialDesign:ButtonAssist.CornerRadius="5"
+                            ToolTip="Resource name: MaterialDesignRaisedSecondaryButton"
+                            Command="{Binding ResetCommand}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Width="150"
+                            Height="40"
+                            FontSize="24"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="BackupRestore" Height="30" Width="30" FontSize="30"/>
+                        <TextBlock Text="{DynamicResource fanccontrolpanel_reset}" Padding="10,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Button>
+
+
+
+            </Grid>
+        </Grid>
+    </StackPanel>
+</UserControl>
