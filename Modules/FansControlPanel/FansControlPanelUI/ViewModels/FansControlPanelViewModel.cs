@@ -68,7 +68,8 @@ namespace FansControlPanelUI.ViewModels
 
             string resultSetSpeed = execute(fullExecuteSetSpeed);
 
-            Growl.Success(new GrowlInfo { Message = "操作成功", ShowDateTime = false, WaitTime = 1 });
+            if(resultSetSpeed != null)
+                Growl.Success(new GrowlInfo { Message = "操作成功", ShowDateTime = false, WaitTime = 1 });
         }
         #endregion
 
@@ -83,9 +84,10 @@ namespace FansControlPanelUI.ViewModels
 
             string fullExecuteReset = $"{ipmitoolPath} {parametersReset}";
 
-            execute(fullExecuteReset);
+            string resultResetSpeed = execute(fullExecuteReset);
 
-            Growl.Success(new GrowlInfo { Message = "重置完成", ShowDateTime = false, WaitTime = 1 });
+            if (resultResetSpeed != null)
+                Growl.Success(new GrowlInfo { Message = "重置完成", ShowDateTime = false, WaitTime = 1 });
         }
         #endregion
 
@@ -115,7 +117,7 @@ namespace FansControlPanelUI.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ExceptionOccurred:{ 0},{ 1}", ex.Message, ex.StackTrace.ToString());
+                Growl.Error(new GrowlInfo { Message = $"啊哦，失败了ExceptionOccurred:{ex.Message},{ex.StackTrace.ToString()}", ShowDateTime = false, WaitTime = 5 });
                 return null;
             }
         }
